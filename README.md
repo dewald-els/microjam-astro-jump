@@ -9,6 +9,8 @@ Astro Jump is a entry for the Micro Jam 001.
 
 ## Micro Jam 001
 
+This game is developed for the [Micro Jam on Itch.io](https://itch.io/jam/micro-jam-1-scifi)
+
 ## About Astro Jump 
 
 You play as an astronaut that has to use his rocket boosters to get to the top before your oxygen runs out. 
@@ -21,4 +23,8 @@ Use Spacebar to boost and move with A/D
 
 #### Joypad
 
-Use D-pad or Analogue and A (xbox), X (PS), B (Switch) controller. 
+Use D-pad or Analogue and A (xbox), X (PS), B (Switch) controller
+
+## Acknowledgements
+
+- [Lospec Colour Palette](https://lospec.com/palette-list/dreamful-space)
