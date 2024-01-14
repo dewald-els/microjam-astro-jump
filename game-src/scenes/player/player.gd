@@ -8,5 +8,5 @@ extends CharacterBody2D
 
 const SPEED = 95.0
 
-func _physics_process(delta):
+func _physics_process(_delta: float):
 	move_and_slide()

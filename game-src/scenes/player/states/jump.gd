@@ -4,12 +4,12 @@ extends State
 @onready var player: Player = owner
 
 var last_y_velocity := 0.0
-var max_jump := 250
-const JUMP_POWER = -3050.0
+var max_jump := 250.0
+const JUMP_POWER := -3050.0
 
 
-func enter(msg: Dictionary = {}) -> void:
-	player.animated_sprite.play("run")
+func enter(_msg: Dictionary = {}) -> void:
+	player.animated_sprite.play("jump")
 	player.label.text = "Jump"
 	
 	

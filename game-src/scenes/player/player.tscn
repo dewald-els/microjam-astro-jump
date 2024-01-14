@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=21 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/player/states/jump.gd" id="5_4v16n"]
 [ext_resource type="Script" path="res://scenes/player/states/die.gd" id="6_7mn1x"]
 [ext_resource type="Script" path="res://scenes/player/states/fall.gd" id="7_346lg"]
+[ext_resource type="Texture2D" uid="uid://cipbuj7va86ru" path="res://scenes/player/sprites/jump.png" id="9_k12ar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kjng"]
 size = Vector2(8, 13)
@@ -19,6 +20,14 @@ region = Rect2(0, 0, 16, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4o4o"]
 atlas = ExtResource("4_2k60n")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8nrb"]
+atlas = ExtResource("9_k12ar")
+region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdmvp"]
+atlas = ExtResource("9_k12ar")
 region = Rect2(16, 0, 16, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltt70"]
@@ -49,6 +58,17 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8nrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdmvp")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -99,9 +119,9 @@ script = ExtResource("7_346lg")
 unique_name_in_owner = true
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_wpup6")
-animation = &"run"
+animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.088533
+frame_progress = 0.887156
 
 [node name="DebugLabel" type="Label" parent="."]
 unique_name_in_owner = true

@@ -4,7 +4,7 @@ extends State
 
 const GRAVITY := 2000
 
-func enter(msg: Dictionary = {}) -> void:
+func enter(_msg: Dictionary = {}) -> void:
 	player.label.text = "Fall"
 
 func physics_update(delta: float) -> void:
