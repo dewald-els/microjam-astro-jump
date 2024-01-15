@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=22 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/player/states/jump.gd" id="5_4v16n"]
 [ext_resource type="Script" path="res://scenes/player/states/die.gd" id="6_7mn1x"]
 [ext_resource type="Script" path="res://scenes/player/states/fall.gd" id="7_346lg"]
+[ext_resource type="Script" path="res://scenes/player/states/pushed.gd" id="8_1hr2m"]
 [ext_resource type="Texture2D" uid="uid://cipbuj7va86ru" path="res://scenes/player/sprites/jump.png" id="9_k12ar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kjng"]
@@ -120,6 +121,10 @@ script = ExtResource("6_7mn1x")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("7_346lg")
 move_speed = 150.0
+
+[node name="Pushed" type="Node" parent="StateMachine"]
+script = ExtResource("8_1hr2m")
+move_speed = 200.0
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

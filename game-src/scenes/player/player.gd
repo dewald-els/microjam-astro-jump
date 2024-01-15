@@ -16,6 +16,11 @@ extends CharacterBody2D
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 
+func _ready() -> void:
+	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
+	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
+
+
 func _physics_process(delta) -> void:
 	apply_gravity(delta)
 	move_and_slide()
@@ -36,8 +41,19 @@ func apply_gravity(delta: float) -> void:
 func get_movement_direction() -> float:
 	return Input.get_axis("player_right", "player_left") * -1.0
 
+func change_state(state: String, _msg: Dictionary = {}) -> void:
+	state_machine.transition_to(state, _msg)
+
 func face_movement_direction(direction: float) -> void:
 	if direction == 0:
 		scale.x = 1
 	else:
 		scale.x = scale.y * direction
+		
+func on_player_entered_fan_zone(force: float) -> void:
+	print("force: ", force)
+	change_state("Pushed", { "force": force })
+			
+			
+func on_player_exited_fan_zone() -> void:
+	change_state("Idle")
