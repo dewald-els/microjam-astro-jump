@@ -90,6 +90,9 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
+jump_height = 100.0
+jump_time_to_peak = 0.5
+jump_time_to_descent = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6.5)
@@ -105,6 +108,7 @@ script = ExtResource("2_i5518")
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("4_sx4pp")
+move_speed = 200.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_4v16n")
@@ -121,10 +125,19 @@ position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_wpup6")
 animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.887156
+frame_progress = 0.529304
 
 [node name="DebugLabel" type="Label" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.25
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
