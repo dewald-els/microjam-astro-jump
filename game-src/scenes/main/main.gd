@@ -13,4 +13,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	oxygen_label.text = "Oxygen: " + str(roundf(oxygen_timer.time_left / total_oxygen * 100))
+	oxygen_label.text = "Oxygen: " + str(roundf(oxygen_timer.time_left / total_oxygen * 100)) + "%"

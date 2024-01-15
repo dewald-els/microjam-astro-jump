@@ -112,12 +112,14 @@ move_speed = 200.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_4v16n")
+move_speed = 100.0
 
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource("6_7mn1x")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("7_346lg")
+move_speed = 150.0
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

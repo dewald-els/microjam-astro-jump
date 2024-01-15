@@ -14,3 +14,6 @@ func enter(_msg: Dictionary = {}) -> void:
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
 		player.state_machine.transition_to("Idle")
+
+	var direction = player.get_movement_direction()
+	player.velocity.x = lerp(player.velocity.x, direction * move_speed, 0.5)

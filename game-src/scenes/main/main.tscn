@@ -19,7 +19,7 @@ offset_bottom = 23.0
 text = "Oxygen: 100%"
 
 [node name="Backgound" type="Node2D" parent="."]
-position = Vector2(-238, -83)
+position = Vector2(-491, -404)
 
 [node name="Sprite2D4" type="Sprite2D" parent="Backgound"]
 position = Vector2(480, 0)
