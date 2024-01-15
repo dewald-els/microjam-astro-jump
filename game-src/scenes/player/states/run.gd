@@ -20,12 +20,4 @@ func physics_update(delta: float) -> void:
 	var direction = player.get_movement_direction()
 	player.velocity.x = lerp(player.velocity.x, direction * move_speed, 0.5)
 	
-	face_running_direction(direction)
-	
-
-func face_running_direction(direction: float) -> void:
-	if direction == 0:
-		player.scale.x = 1
-	else:
-		player.scale.x = player.scale.y * direction 
-		
+	player.face_movement_direction(direction)

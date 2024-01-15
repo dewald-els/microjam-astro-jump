@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1b8jqlact8a6"]
+
+[ext_resource type="Texture2D" uid="uid://qwj0ffofpxkf" path="res://scenes/fan/sprites/fan.png" id="1_5wi8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kttv"]
+atlas = ExtResource("1_5wi8o")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37044"]
+atlas = ExtResource("1_5wi8o")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j30yn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kttv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37044")
+}],
+"loop": true,
+"name": &"On",
+"speed": 5.0
+}]
+
+[node name="Fan" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j30yn")
+animation = &"On"
+autoplay = "On"
+frame_progress = 0.283236

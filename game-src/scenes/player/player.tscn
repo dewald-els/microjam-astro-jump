@@ -125,9 +125,9 @@ move_speed = 150.0
 unique_name_in_owner = true
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_wpup6")
-animation = &"jump"
+animation = &"run"
 autoplay = "idle"
-frame_progress = 0.529304
+frame_progress = 0.594141
 
 [node name="DebugLabel" type="Label" parent="."]
 unique_name_in_owner = true

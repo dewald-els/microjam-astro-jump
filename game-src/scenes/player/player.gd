@@ -35,3 +35,9 @@ func apply_gravity(delta: float) -> void:
 
 func get_movement_direction() -> float:
 	return Input.get_axis("player_right", "player_left") * -1.0
+
+func face_movement_direction(direction: float) -> void:
+	if direction == 0:
+		scale.x = 1
+	else:
+		scale.x = scale.y * direction
