@@ -1,10 +1,10 @@
 class_name Player
 extends CharacterBody2D
-
 @onready var state_machine: StateMachine = %StateMachine
-@onready var label: Label = %DebugLabel
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
+@onready var label: Label = %DebugLabel
+@onready var label_vel: Label = %DebugVelLabel
 
 # Jump Mechanics: https://www.youtube.com/watch?v=IOe1aGY6hXA
 @export var jump_height: float
@@ -16,14 +16,15 @@ extends CharacterBody2D
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 
+var was_on_floor: bool = false
+
 func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
 
 
 func _physics_process(delta) -> void:
-	apply_gravity(delta)
-	move_and_slide()
+	pass
 
 
 func get_gravity() -> float:
@@ -47,8 +48,10 @@ func change_state(state: String, _msg: Dictionary = {}) -> void:
 func face_movement_direction(direction: float) -> void:
 	if direction == 0:
 		scale.x = 1
-	else:
-		scale.x = scale.y * direction
+	elif direction > 0.0:
+		scale.x = scale.y * 1
+	elif direction < 0.0:
+		scale.x = scale.y * -1
 		
 func on_player_entered_fan_zone(force: float) -> void:
 	print("force: ", force)

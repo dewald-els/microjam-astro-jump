@@ -10,7 +10,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.animated_sprite.play("jump")
 	player.label.text = "Jump"
 	player.velocity.y = player.jump_velocity
-	
+	player.coyote_timer.stop()
 	
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
@@ -21,3 +21,6 @@ func physics_update(delta: float) -> void:
 	var direction = player.get_movement_direction()
 	player.velocity.x = lerp(player.velocity.x, direction * move_speed, 0.5)
 	player.face_movement_direction(direction)
+	
+	player.apply_gravity(delta)
+	player.move_and_slide()

@@ -12,9 +12,6 @@
 [ext_resource type="Script" path="res://scenes/player/states/pushed.gd" id="8_1hr2m"]
 [ext_resource type="Texture2D" uid="uid://cipbuj7va86ru" path="res://scenes/player/sprites/jump.png" id="9_k12ar"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1kjng"]
-size = Vector2(8, 13)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_rlqcp"]
 atlas = ExtResource("4_2k60n")
 region = Rect2(0, 0, 16, 20)
@@ -89,15 +86,14 @@ animations = [{
 "speed": 11.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22u5t"]
+size = Vector2(8, 13)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
 jump_height = 100.0
-jump_time_to_peak = 0.5
-jump_time_to_descent = 0.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6.5)
-shape = SubResource("RectangleShape2D_1kjng")
+jump_time_to_peak = 0.25
+jump_time_to_descent = 0.3
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -109,7 +105,7 @@ script = ExtResource("2_i5518")
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("4_sx4pp")
-move_speed = 200.0
+move_speed = 150.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_4v16n")
@@ -120,7 +116,7 @@ script = ExtResource("6_7mn1x")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("7_346lg")
-move_speed = 150.0
+move_speed = 100.0
 
 [node name="Pushed" type="Node" parent="StateMachine"]
 script = ExtResource("8_1hr2m")
@@ -134,16 +130,33 @@ animation = &"run"
 autoplay = "idle"
 frame_progress = 0.594141
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_22u5t")
+
+[node name="DebugVelLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = -28.0
+offset_right = 74.0
+offset_bottom = -5.0
+theme_override_font_sizes/font_size = 7
+text = "Velocity:"
+
 [node name="DebugLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 8.0
+offset_top = -38.0
+offset_right = 104.0
+offset_bottom = -15.0
+theme_override_font_sizes/font_size = 7
+text = "Debug Label"
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
-wait_time = 0.25
+wait_time = 0.15
 one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
