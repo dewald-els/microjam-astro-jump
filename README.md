@@ -34,5 +34,5 @@ Use D-pad or Analogue and A (xbox), X (PS), B (Switch) controller
 
 ## Contributors
 
-- [mr_betamax](@dewald-els)
-- [miclau13](@miclau13)
+- [mr_betamax](https://github.com/dewald-els)
+- [miclau13](https://github.com/miclau13)
