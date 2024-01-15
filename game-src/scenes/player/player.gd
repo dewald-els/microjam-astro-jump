@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-
+const jump_drag_multiplier: int = 3
 
 var was_on_floor: bool = false
 
@@ -36,7 +36,10 @@ func is_coyote_timer_running() -> bool:
 
 
 func apply_gravity(delta: float) -> void:
-	velocity.y += get_gravity() * delta
+	if velocity.y < 0 && !Input.is_action_pressed("player_jump"):
+		velocity.y += get_gravity() * jump_drag_multiplier * delta
+	else:
+		velocity.y += get_gravity() * delta
 
 
 func get_movement_direction() -> float:

@@ -156,7 +156,7 @@ text = "Debug Label"
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
-wait_time = 0.15
+wait_time = 0.095
 one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
