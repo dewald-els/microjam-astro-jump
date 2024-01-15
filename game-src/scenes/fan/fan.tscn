@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1b8jqlact8a6"]
+[gd_scene load_steps=9 format=3 uid="uid://d1b8jqlact8a6"]
 
 [ext_resource type="Texture2D" uid="uid://qwj0ffofpxkf" path="res://scenes/fan/sprites/fan.png" id="1_5wi8o"]
+[ext_resource type="Script" path="res://scenes/fan/fan.gd" id="1_dyrwn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kttv"]
 atlas = ExtResource("1_5wi8o")
@@ -24,10 +25,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_fd53h"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0.00619835, 200), 0.0, 0.0, 0, 0, Vector2(0.502066, -198.613), 0.0, 0.0, 0, 0, Vector2(0.987603, 123.883), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fstsd"]
+curve = SubResource("Curve_fd53h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7o6h2"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 15, 1)
+gravity = Vector3(98, 0, 0)
+linear_accel_curve = SubResource("CurveTexture_fstsd")
+color = Color(0.960906, 0.823636, 0.721538, 1)
+
 [node name="Fan" type="Area2D"]
+script = ExtResource("1_dyrwn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j30yn")
 animation = &"On"
 autoplay = "On"
-frame_progress = 0.283236
+frame_progress = 0.0700243
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_7o6h2")
+lifetime = 1.5
+randomness = 0.15
