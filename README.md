@@ -7,7 +7,7 @@ Astro Jump is a entry for the Micro Jam 001.
 - [Micro Jam 001](#micro-jam-001)
 - [About Astro Jump](#about-astro-jump)
 - [How to play](#how-to-play)
-- [Acknowledgements)[#acknowledgements]
+- [Acknowledgements](#acknowledgements)
 - [Contributors](#contributors)
 
 ## Micro Jam 001
