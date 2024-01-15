@@ -36,9 +36,9 @@ func is_coyote_timer_running() -> bool:
 
 
 func apply_gravity(delta: float) -> void:
-	if velocity.y < 0 && !Input.is_action_pressed("player_jump"):
+	if velocity.y < 0 && !Input.is_action_pressed("player_jump"): # Low Jump
 		velocity.y += get_gravity() * jump_drag_multiplier * delta
-	else:
+	else: # Regular Jump
 		velocity.y += get_gravity() * delta
 
 
