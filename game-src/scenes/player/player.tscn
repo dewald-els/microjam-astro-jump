@@ -95,6 +95,7 @@ script = ExtResource("1_wxwpk")
 jump_height = 100.0
 jump_time_to_peak = 0.27
 jump_time_to_descent = 0.32
+base_move_speed = 150.0
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true

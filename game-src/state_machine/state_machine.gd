@@ -17,6 +17,8 @@ func _ready() -> void:
 
 	state.enter()
 
+func get_state_name() -> String:
+	return state.name
 
 
 func _unhandled_input(event: InputEvent) -> void:
