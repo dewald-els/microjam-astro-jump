@@ -17,15 +17,26 @@ func enter(msg: Dictionary = {}) -> void:
 	print("Msg", msg)
 
 func physics_update(delta: float) -> void:
-	if Input.is_action_just_pressed("player_jump"):
-		player.change_state(player.PlayerState.Jump)
+	if Input.is_action_just_pressed("player_jump") and player.is_on_floor():
+		player.jump()
 		
 	var direction = player.get_movement_direction()
-	if abs(direction) > 0:
-		player.velocity.x = lerp(player.velocity.x, direction * (move_speed - force), 1)
+	if direction > 0: # Right
+		if force > 0: # Right
+			player.velocity.x = direction * (move_speed + force * 0.5)
+		else:
+			player.velocity.x = direction * (move_speed - force)
+	elif direction < 0: # Left
+		if force > 0: # Right
+			player.velocity.x = direction * (move_speed - force)
+		else:
+			player.velocity.x = direction * (move_speed + force * 0.5)
 	else:
 		player.velocity.x = force
+		
 	player.label.text = "Pushed\nVeloctity: " + str(player.velocity.x)
 	
 	player.apply_gravity(delta)
 	player.move_and_slide()
+	
+	player.face_movement_direction(direction)

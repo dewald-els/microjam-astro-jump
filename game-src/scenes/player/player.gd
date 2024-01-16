@@ -41,8 +41,8 @@ func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
 
-func _physics_process(delta) -> void:
-	pass
+func _process(delta) -> void:
+	label_vel.text = str(velocity)
 
 
 func get_gravity() -> float:
@@ -75,6 +75,8 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 			state_machine.transition_to("Die", _msg)
 		PlayerState.Fall:
 			state_machine.transition_to("Fall", _msg)
+		PlayerState.Pushed:
+			state_machine.transition_to("Pushed", _msg)
 		_:
 			state_machine.transition_to("Idle", _msg)
 
@@ -89,7 +91,9 @@ func face_movement_direction(direction: float) -> void:
 func on_player_entered_fan_zone(force: float) -> void:
 	print("force: ", force)
 	change_state(PlayerState.Pushed, { "force": force })
-			
+
+func jump() -> void:
+	velocity.y = jump_velocity
 			
 func on_player_exited_fan_zone() -> void:
 	change_state(PlayerState.Idle)

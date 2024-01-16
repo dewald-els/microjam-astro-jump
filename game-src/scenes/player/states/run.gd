@@ -24,7 +24,7 @@ func physics_update(delta: float) -> void:
 	player.was_on_floor = player.is_on_floor()
 	
 	var direction = player.get_movement_direction()
-	player.velocity.x = lerp(player.velocity.x, direction * move_speed, 0.5)
+	player.velocity.x = direction * move_speed
 	
 	# Apply Physics
 	player.apply_gravity(delta)

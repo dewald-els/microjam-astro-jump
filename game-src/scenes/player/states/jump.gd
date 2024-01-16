@@ -9,7 +9,7 @@ extends State
 func enter(_msg: Dictionary = {}) -> void:
 	player.animated_sprite.play("jump")
 	player.label.text = "Jump"
-	player.velocity.y = player.jump_velocity
+	player.jump()
 	player.coyote_timer.stop()
 	
 func physics_update(delta: float) -> void:
@@ -19,7 +19,7 @@ func physics_update(delta: float) -> void:
 		player.change_state(player.PlayerState.Fall)
 	
 	var direction = player.get_movement_direction()
-	player.velocity.x = lerp(player.velocity.x, direction * move_speed, 0.5)
+	player.velocity.x = direction * move_speed
 	player.face_movement_direction(direction)
 	
 	player.apply_gravity(delta)
