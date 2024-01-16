@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var state_machine: StateMachine = %StateMachine
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
+@onready var jump_buffer_timer: Timer = %JumpBufferTimer
 @onready var label: Label = %DebugLabel
 @onready var label_vel: Label = %DebugVelLabel
 
