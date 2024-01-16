@@ -86,14 +86,15 @@ animations = [{
 "speed": 11.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_22u5t"]
-size = Vector2(8, 13)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0a1nb"]
+radius = 4.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
 jump_height = 100.0
-jump_time_to_peak = 0.25
-jump_time_to_descent = 0.3
+jump_time_to_peak = 0.27
+jump_time_to_descent = 0.32
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -131,8 +132,8 @@ autoplay = "idle"
 frame_progress = 0.594141
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6.5)
-shape = SubResource("RectangleShape2D_22u5t")
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_0a1nb")
 
 [node name="DebugVelLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -161,5 +162,5 @@ one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true

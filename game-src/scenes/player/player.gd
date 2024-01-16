@@ -62,9 +62,9 @@ func apply_gravity(delta: float) -> void:
 
 func get_movement_direction() -> float:
 	var axis = Input.get_axis("player_left", "player_right")
-	if axis > 0:
+	if axis > ControllerConfig.AnalogueBuffer:
 		return 1
-	elif axis < 0:
+	elif axis < -ControllerConfig.AnalogueBuffer:
 		return -1
 	else:
 		return 0
