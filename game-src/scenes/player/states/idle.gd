@@ -13,12 +13,12 @@ func enter(_msg: Dictionary = {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("player_jump"):
-		player.state_machine.transition_to("Jump")
+		player.change_state(player.PlayerState.Jump)
 		
 	elif abs(player.get_movement_direction()) > 0:
-		player.state_machine.transition_to("Run")
+		player.change_state(player.PlayerState.Run)
 		
-	player.was_on_floor = player.is_on_floor()	
+	player.was_on_floor = player.is_on_floor()
 	
 	player.apply_gravity(delta)
 	player.move_and_slide()

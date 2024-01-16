@@ -18,7 +18,7 @@ func enter(msg: Dictionary = {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("player_jump"):
-		player.change_state("Jump")
+		player.change_state(player.PlayerState.Jump)
 		
 	var direction = player.get_movement_direction()
 	if abs(direction) > 0:

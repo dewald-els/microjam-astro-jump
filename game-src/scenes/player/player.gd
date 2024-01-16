@@ -19,10 +19,27 @@ const jump_drag_multiplier: int = 3
 
 var was_on_floor: bool = false
 
+enum PlayerState {
+	Idle,
+	Run,
+	Jump,
+	Die,
+	Fall,
+	Pushed
+}
+
+const States: Dictionary = {
+	Idle = "Idle",
+	Run = "Run",
+	Jump = "Jump",
+	Die = "Die",
+	Fall = "Fall",
+	Pushed = "Pushed"
+}
+
 func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
-
 
 func _physics_process(delta) -> void:
 	pass
@@ -46,8 +63,20 @@ func apply_gravity(delta: float) -> void:
 func get_movement_direction() -> float:
 	return Input.get_axis("player_right", "player_left") * -1.0
 
-func change_state(state: String, _msg: Dictionary = {}) -> void:
-	state_machine.transition_to(state, _msg)
+func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
+	match state:
+		PlayerState.Idle:
+			state_machine.transition_to("Idle", _msg)
+		PlayerState.Run:
+			state_machine.transition_to("Run", _msg)
+		PlayerState.Jump:
+			state_machine.transition_to("Jump", _msg)
+		PlayerState.Die:
+			state_machine.transition_to("Die", _msg)
+		PlayerState.Fall:
+			state_machine.transition_to("Fall", _msg)
+		_:
+			state_machine.transition_to("Idle", _msg)
 
 func face_movement_direction(direction: float) -> void:
 	if direction == 0:
@@ -59,8 +88,8 @@ func face_movement_direction(direction: float) -> void:
 		
 func on_player_entered_fan_zone(force: float) -> void:
 	print("force: ", force)
-	change_state("Pushed", { "force": force })
+	change_state(PlayerState.Pushed, { "force": force })
 			
 			
 func on_player_exited_fan_zone() -> void:
-	change_state("Idle")
+	change_state(PlayerState.Idle)
