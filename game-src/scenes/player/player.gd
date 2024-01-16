@@ -43,7 +43,7 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	label_vel.text = str(velocity)
-
+	label.text = str(state_machine.state)
 
 func get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
@@ -61,7 +61,13 @@ func apply_gravity(delta: float) -> void:
 
 
 func get_movement_direction() -> float:
-	return Input.get_axis("player_right", "player_left") * -1.0
+	var axis = Input.get_axis("player_left", "player_right")
+	if axis > 0:
+		return 1
+	elif axis < 0:
+		return -1
+	else:
+		return 0
 
 func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 	match state:

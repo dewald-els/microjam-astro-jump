@@ -136,7 +136,6 @@ shape = SubResource("RectangleShape2D_22u5t")
 
 [node name="DebugVelLabel" type="Label" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_left = 8.0
 offset_top = -28.0
 offset_right = 74.0
@@ -146,7 +145,6 @@ text = "Velocity:"
 
 [node name="DebugLabel" type="Label" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_left = 8.0
 offset_top = -38.0
 offset_right = 104.0

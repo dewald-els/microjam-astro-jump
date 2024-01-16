@@ -9,7 +9,6 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.label.text = "Idle"
 	player.animated_sprite.play("idle")
 	player.coyote_timer.stop()
-	player.velocity.y = 0
 
 func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("player_jump"):
