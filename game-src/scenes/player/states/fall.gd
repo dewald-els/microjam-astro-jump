@@ -21,7 +21,7 @@ func physics_update(delta: float) -> void:
 		
 
 	var direction = player.get_movement_direction()
-	player.velocity.x = direction * move_speed
+	player.apply_movement(direction, move_speed)
 	
 	player.apply_gravity(delta)
 	player.move_and_slide()

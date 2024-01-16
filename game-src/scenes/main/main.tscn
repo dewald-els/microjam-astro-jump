@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d1b8jqlact8a6" path="res://scenes/fan/fan.tscn" id="6_n1o1k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efw0d"]
-size = Vector2(146, 48)
+size = Vector2(184, 56)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_vqf2h")
@@ -67,13 +67,13 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
 position = Vector2(335, 85)
-jump_height = 52.0
+jump_height = 64.0
 jump_time_to_descent = 0.23
 
 [node name="Fan" parent="." instance=ExtResource("6_n1o1k")]
 position = Vector2(136, 96)
-fan_power = 160.0
+fan_power = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fan"]
-position = Vector2(63, 0)
+position = Vector2(82, -4)
 shape = SubResource("RectangleShape2D_efw0d")

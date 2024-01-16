@@ -94,6 +94,12 @@ func on_player_entered_fan_zone(force: float) -> void:
 
 func jump() -> void:
 	velocity.y = jump_velocity
-			
+
+func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
+	if direction == 0:
+		velocity.x = move_toward(velocity.x, 0, move_speed)
+	else:
+		velocity.x = direction * move_speed
+
 func on_player_exited_fan_zone() -> void:
 	change_state(PlayerState.Idle)

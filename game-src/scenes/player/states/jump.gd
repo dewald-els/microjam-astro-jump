@@ -19,7 +19,7 @@ func physics_update(delta: float) -> void:
 		player.change_state(player.PlayerState.Fall)
 	
 	var direction = player.get_movement_direction()
-	player.velocity.x = direction * move_speed
+	player.apply_movement(direction, move_speed)
 	player.face_movement_direction(direction)
 	
 	player.apply_gravity(delta)

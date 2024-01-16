@@ -24,7 +24,8 @@ func physics_update(delta: float) -> void:
 	player.was_on_floor = player.is_on_floor()
 	
 	var direction = player.get_movement_direction()
-	player.velocity.x = direction * move_speed
+	player.apply_movement(direction, move_speed)
+	
 	
 	# Apply Physics
 	player.apply_gravity(delta)
