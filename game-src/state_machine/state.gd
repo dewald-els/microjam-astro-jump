@@ -17,7 +17,7 @@ func physics_update(_delta: float) -> void:
 	pass
 
 
-func enter(_msg := {}) -> void:
+func enter(_msg: Dictionary = {}) -> void:
 	pass
 
 

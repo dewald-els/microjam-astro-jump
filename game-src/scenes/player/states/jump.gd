@@ -18,7 +18,7 @@ func physics_update(delta: float) -> void:
 	if player.velocity.y > 0.0 and not player.is_on_floor():
 		player.change_state(player.PlayerState.Fall)
 	
-	var direction = player.get_movement_direction()
+	var direction: int = player.get_movement_direction()
 	player.apply_movement(direction, move_speed)
 	player.face_movement_direction(direction)
 	

@@ -16,7 +16,7 @@ func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("player_jump") and player.is_on_floor():
 		player.jump()
 		
-	var direction = player.get_movement_direction()
+	var direction: int = player.get_movement_direction()
 	var processed_move_speed: float
 	if direction > 0: # Right
 		if force > 0: # Right

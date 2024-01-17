@@ -42,7 +42,7 @@ func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
 
-func _process(delta) -> void:
+func _process(_delta: float) -> void:
 	label_vel.text = str(velocity)
 	label.text = str(state_machine.state)
 
@@ -61,8 +61,8 @@ func apply_gravity(delta: float) -> void:
 		velocity.y += get_gravity() * delta
 
 
-func get_movement_direction() -> float:
-	var axis = Input.get_axis("player_left", "player_right")
+func get_movement_direction() -> int:
+	var axis: float = Input.get_axis("player_left", "player_right")
 	if axis > ControllerConfig.AnalogueBuffer:
 		return 1
 	elif axis < -ControllerConfig.AnalogueBuffer:

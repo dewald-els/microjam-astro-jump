@@ -7,7 +7,7 @@ extends State
 func enter(_msg: Dictionary = {}) -> void:
 	player.animated_sprite.play("run")
 	player.label.text = "Run"
-	var direction = player.get_movement_direction()
+	var direction: int = player.get_movement_direction()
 	player.apply_movement(direction, move_speed)
 	
 
@@ -25,7 +25,7 @@ func physics_update(delta: float) -> void:
 	
 	player.was_on_floor = player.is_on_floor()
 	
-	var direction = player.get_movement_direction()
+	var direction: int = player.get_movement_direction()
 	player.apply_movement(direction, move_speed)
 	
 	

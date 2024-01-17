@@ -20,7 +20,7 @@ func physics_update(delta: float) -> void:
 		player.jump_buffer_timer.start()
 		
 
-	var direction = player.get_movement_direction()
+	var direction: int = player.get_movement_direction()
 	player.apply_movement(direction, move_speed)
 	
 	player.apply_gravity(delta)

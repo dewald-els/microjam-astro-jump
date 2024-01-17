@@ -1,7 +1,7 @@
 class_name StateMachine
 extends Node
 
-signal transitioned(state_name)
+signal transitioned(state_name: String)
 
 
 @export var initial_state: NodePath
@@ -12,7 +12,7 @@ signal transitioned(state_name)
 func _ready() -> void:
 	await owner.ready
 
-	for child in get_children():
+	for child: State in get_children():
 		child.state_machine = self
 
 	state.enter()
