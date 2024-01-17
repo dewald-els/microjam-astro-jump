@@ -86,9 +86,8 @@ animations = [{
 "speed": 11.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0a1nb"]
-radius = 4.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ok50q"]
+size = Vector2(10, 14)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
@@ -133,8 +132,8 @@ autoplay = "idle"
 frame_progress = 0.594141
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-shape = SubResource("CapsuleShape2D_0a1nb")
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_ok50q")
 
 [node name="DebugVelLabel" type="Label" parent="."]
 unique_name_in_owner = true
