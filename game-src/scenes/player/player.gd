@@ -95,7 +95,7 @@ func face_movement_direction(direction: float) -> void:
 	elif direction < 0.0:
 		scale.x = scale.y * -1
 		
-func on_player_entered_fan_zone(force: float) -> void:
+func on_player_entered_fan_zone(force: Vector2) -> void:
 	print("force: ", force)
 	change_state(PlayerState.Pushed, { "force": force })
 

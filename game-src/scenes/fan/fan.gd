@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var fan_power: float
+@export var fan_power: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
