@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxm1q5fr21qr5"]
+
+[sub_resource type="Curve" id="Curve_duibd"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0.00619835, 200), 0.0, 0.0, 0, 0, Vector2(0.502066, -198.613), 0.0, 0.0, 0, 0, Vector2(0.987603, 123.883), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ltu8c"]
+curve = SubResource("Curve_duibd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7fcfh"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 15, 1)
+gravity = Vector3(98, 0, 0)
+linear_accel_curve = SubResource("CurveTexture_ltu8c")
+color = Color(0.960906, 0.823636, 0.721538, 1)
+
+[node name="WindParticles" type="GPUParticles2D"]
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_7fcfh")
+lifetime = 1.5
+randomness = 0.15

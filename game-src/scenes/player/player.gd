@@ -95,9 +95,9 @@ func face_movement_direction(direction: float) -> void:
 	elif direction < 0.0:
 		scale.x = scale.y * -1
 		
-func on_player_entered_fan_zone(force: Vector2) -> void:
+func on_player_entered_fan_zone(force: float, force_direction: String) -> void:
 	print("force: ", force)
-	change_state(PlayerState.Pushed, { "force": force })
+	change_state(PlayerState.Pushed, { "force": force, "force_direction": force_direction })
 
 func jump() -> void:
 	velocity.y = jump_velocity
