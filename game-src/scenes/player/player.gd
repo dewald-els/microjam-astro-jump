@@ -53,23 +53,6 @@ func get_gravity() -> float:
 func is_coyote_timer_running() -> bool:
 	return !coyote_timer.is_stopped()
 
-
-func apply_gravity(delta: float) -> void:
-	if velocity.y < 0 && !Input.is_action_pressed("player_jump"): # Low Jump
-		velocity.y += get_gravity() * jump_drag_multiplier * delta
-	else: # Regular Jump
-		velocity.y += get_gravity() * delta
-
-
-func get_movement_direction() -> int:
-	var axis: float = Input.get_axis("player_left", "player_right")
-	if axis > ControllerConfig.AnalogueBuffer:
-		return 1
-	elif axis < -ControllerConfig.AnalogueBuffer:
-		return -1
-	else:
-		return 0
-
 func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 	match state:
 		PlayerState.Idle:
@@ -87,6 +70,24 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 		_:
 			state_machine.transition_to("Idle", _msg)
 
+# Common actions
+func apply_gravity(delta: float) -> void:
+	if velocity.y < 0 && !Input.is_action_pressed("player_jump"): # Low Jump
+		velocity.y += get_gravity() * jump_drag_multiplier * delta
+	else: # Regular Jump
+		velocity.y += get_gravity() * delta
+
+
+func get_movement_direction() -> int:
+	var axis: float = Input.get_axis("player_left", "player_right")
+	if axis > ControllerConfig.AnalogueBuffer:
+		return 1
+	elif axis < -ControllerConfig.AnalogueBuffer:
+		return -1
+	else:
+		return 0
+		
+		
 func face_movement_direction(direction: float) -> void:
 	if direction == 0:
 		scale.x = 1
@@ -95,10 +96,6 @@ func face_movement_direction(direction: float) -> void:
 	elif direction < 0.0:
 		scale.x = scale.y * -1
 		
-func on_player_entered_fan_zone(force: float, force_direction: String) -> void:
-	print("force: ", force)
-	change_state(PlayerState.Pushed, { "force": force, "force_direction": force_direction })
-
 func jump() -> void:
 	velocity.y = jump_velocity
 
@@ -107,6 +104,12 @@ func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 	else:
 		velocity.x = direction * move_speed
+
+# Events
+
+func on_player_entered_fan_zone(force: float, force_direction: String) -> void:
+	print("force: ", force)
+	change_state(PlayerState.Pushed, { "force": force, "force_direction": force_direction })
 
 func on_player_exited_fan_zone() -> void:
 	change_state(PlayerState.Idle)
