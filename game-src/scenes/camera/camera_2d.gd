@@ -2,6 +2,9 @@ extends Camera2D
 
 @export var follow: Node2D
 
+func _ready() -> void:
+	make_current()
+
 # Called when the node enters the scene tree for the first time.
 func _process(_delta: float) -> void:
 	if follow:

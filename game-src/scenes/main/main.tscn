@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ds6i16k6x36ol"]
+[gd_scene load_steps=10 format=3 uid="uid://ds6i16k6x36ol"]
 
 [ext_resource type="PackedScene" uid="uid://sjhnnyj383b3" path="res://scenes/player/player.tscn" id="1_1cdke"]
 [ext_resource type="TileSet" uid="uid://bvugbhh5qmfak" path="res://resources/tiles/tile_set.tres" id="1_faw8n"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_vqf2h"]
+[ext_resource type="PackedScene" uid="uid://c26imya6om8te" path="res://managers/oxygen_manager/oxygen_manager.tscn" id="2_sr6fs"]
 [ext_resource type="PackedScene" uid="uid://bn56uuir7ip7j" path="res://scenes/camera/camera_2d.tscn" id="3_pvuye"]
 [ext_resource type="PackedScene" uid="uid://bdhng6fu0hao3" path="res://scenes/oxygen/oxygen.tscn" id="6_iac81"]
 [ext_resource type="PackedScene" uid="uid://d1b8jqlact8a6" path="res://scenes/fan/fan.tscn" id="6_n1o1k"]
@@ -15,7 +16,6 @@ size = Vector2(98, 31)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_vqf2h")
-total_oxygen = 60.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -24,6 +24,9 @@ unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Oxygen: 100%"
+
+[node name="OxygenManager" parent="." instance=ExtResource("2_sr6fs")]
+total_oxygen = 30.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
 position_smoothing_enabled = true
@@ -46,12 +49,12 @@ layer_1/tile_data = PackedInt32Array(524296, 262144, 1, 589832, 262144, 1, 65536
 
 [node name="OxygenTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 60.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
-position = Vector2(138, 192)
+position = Vector2(258, 16)
 jump_height = 64.0
 jump_time_to_descent = 0.23
 
@@ -75,3 +78,6 @@ shape = SubResource("RectangleShape2D_4aed4")
 
 [node name="Oxygen" parent="." instance=ExtResource("6_iac81")]
 position = Vector2(323, -46)
+
+[node name="Oxygen2" parent="." instance=ExtResource("6_iac81")]
+position = Vector2(325, -562)
