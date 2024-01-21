@@ -26,7 +26,7 @@ offset_bottom = 23.0
 text = "Oxygen: 100%"
 
 [node name="OxygenManager" parent="." instance=ExtResource("2_sr6fs")]
-total_oxygen = 30.0
+total_oxygen = 10.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
 position_smoothing_enabled = true

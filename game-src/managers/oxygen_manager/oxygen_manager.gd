@@ -6,15 +6,29 @@ extends Node
 @onready var oxygen_label: Label = %OxygenLabel
 @onready var oxygen_timer: Timer = %OxygenTimer
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	oxygen_timer.connect("timeout", on_oxygen_depleted)
 	oxygen_timer.wait_time = total_oxygen
 	SignalBus.connect("oxygen_collect", on_oxygen_collected)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta: float) -> void:
-	oxygen_label.text = "Oxygen: " + str(roundf(oxygen_timer.time_left / total_oxygen * 100)) + "%"
+	var oxygen_level:float = roundf(oxygen_timer.time_left / total_oxygen * 100)
+	oxygen_label.text = "Oxygen: " + str(oxygen_level) + "%"
+	if oxygen_level == 0:
+		pass
+	elif (oxygen_level < 20): 
+		print("Oxygen Critial")
+	elif oxygen_level < 40:
+		print("Oxygen Low")
+	
+
+
+func on_oxygen_depleted() -> void:
+	SignalBus.emit_signal("oxygen_depleted")
+	pass
 
 
 func on_oxygen_collected(oxygen_value: float) -> void:
