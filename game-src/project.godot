@@ -37,6 +37,10 @@ window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="Astro Jump"
+
 [input]
 
 player_left={
@@ -68,6 +72,5 @@ player_jump={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.129412, 0.0980392, 0.235294, 1)
