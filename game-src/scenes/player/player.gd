@@ -108,8 +108,9 @@ func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
 # Events
 
 func on_player_entered_fan_zone(force: float, force_direction: String) -> void:
-	print("force: ", force)
+	
 	change_state(PlayerState.Pushed, { "force": force, "force_direction": force_direction })
 
 func on_player_exited_fan_zone() -> void:
-	change_state(PlayerState.Idle)
+	await get_tree().create_timer(0.20).timeout
+	change_state(PlayerState.Fall)

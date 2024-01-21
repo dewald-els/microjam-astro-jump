@@ -10,7 +10,7 @@
 size = Vector2(132, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4aed4"]
-size = Vector2(78, 31)
+size = Vector2(98, 31)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_vqf2h")
@@ -69,5 +69,5 @@ fan_power = 250.0
 direction = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fan2"]
-position = Vector2(33, -0.5)
+position = Vector2(43, -0.499969)
 shape = SubResource("RectangleShape2D_4aed4")
