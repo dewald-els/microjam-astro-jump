@@ -4,8 +4,12 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
+
+
+# Debug
 @onready var label: Label = %DebugLabel
 @onready var label_vel: Label = %DebugVelLabel
+@export var enabled_debug_labels: bool = false
 
 # Jump Mechanics: https://www.youtube.com/watch?v=IOe1aGY6hXA
 @export var jump_height: float
@@ -42,6 +46,9 @@ const States: Dictionary = {
 func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
+	if not enabled_debug_labels:
+		label.visible = false
+		label_vel.visible = false
 
 func _process(_delta: float) -> void:
 	label_vel.text = str(velocity)
