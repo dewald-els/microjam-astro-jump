@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
 @export var base_move_speed: float
+@export_range(0.0, 1.0) var jump_smoothing: float
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -54,6 +55,7 @@ func is_coyote_timer_running() -> bool:
 	return !coyote_timer.is_stopped()
 
 func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
+
 	match state:
 		PlayerState.Idle:
 			state_machine.transition_to("Idle", _msg)
@@ -97,7 +99,7 @@ func face_movement_direction(direction: float) -> void:
 		scale.x = scale.y * -1
 		
 func jump() -> void:
-	velocity.y = jump_velocity
+	velocity.y = lerp(velocity.y, jump_velocity, jump_smoothing)
 
 func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
 	if direction == 0:

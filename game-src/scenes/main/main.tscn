@@ -55,8 +55,10 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
 position = Vector2(258, 16)
-jump_height = 64.0
-jump_time_to_descent = 0.23
+jump_height = 68.0
+jump_time_to_peak = 0.35
+jump_time_to_descent = 0.3
+jump_smoothing = 0.9
 
 [node name="Fan" parent="." instance=ExtResource("6_n1o1k")]
 position = Vector2(104, 96)
