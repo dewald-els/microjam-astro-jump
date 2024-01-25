@@ -31,7 +31,8 @@ enum PlayerState {
 	Jump,
 	Die,
 	Fall,
-	Pushed
+	Pushed,
+	Dead
 }
 
 const States: Dictionary = {
@@ -46,6 +47,7 @@ const States: Dictionary = {
 func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
+	SignalBus.connect("oxygen_depleted", on_oxygen_depleted)
 	if not enabled_debug_labels:
 		label.visible = false
 		label_vel.visible = false
@@ -76,6 +78,8 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 			state_machine.transition_to("Fall", _msg)
 		PlayerState.Pushed:
 			state_machine.transition_to("Pushed", _msg)
+		PlayerState.Dead:
+			state_machine.transition_to("Dead", _msg)
 		_:
 			state_machine.transition_to("Idle", _msg)
 
@@ -116,10 +120,14 @@ func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
 
 # Events
 
+func on_oxygen_depleted() -> void:
+	change_state(PlayerState.Die)
+
 func on_player_entered_fan_zone(force: float, force_direction: String) -> void:
-	
 	change_state(PlayerState.Pushed, { "force": force, "force_direction": force_direction })
 
-func on_player_exited_fan_zone() -> void:
-	await get_tree().create_timer(0.20).timeout
+func on_player_exited_fan_zone(direction: String) -> void:
+	if direction == "Up": # Allow velocity to normalise
+		await get_tree().create_timer(0.20).timeout
+	
 	change_state(PlayerState.Fall)

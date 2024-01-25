@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dss00hhebmiik"]
+
+[ext_resource type="Script" path="res://scenes/finish/finish.gd" id="1_mifjk"]
+[ext_resource type="Texture2D" uid="uid://dlvmoxlv66bn7" path="res://scenes/finish/sprites/idle.png" id="2_y03ql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5wyu"]
+atlas = ExtResource("2_y03ql")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xc3j1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5wyu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Finish" type="Area2D"]
+script = ExtResource("1_mifjk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_xc3j1")
+animation = &"idle"
