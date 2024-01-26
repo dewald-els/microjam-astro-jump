@@ -77,15 +77,13 @@ text = "Oxygen: 100%"
 total_oxygen = 10.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+position = Vector2(240, 2.08165e-12)
 drag_left_margin = 0.4
 drag_top_margin = 0.4
 drag_right_margin = 0.4
 drag_bottom_margin = 0.4
 follow = NodePath("../Player")
-zoom_smoothing = 0.9
+smoothing_distance = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_faw8n")
