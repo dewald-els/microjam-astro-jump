@@ -3,7 +3,7 @@ extends Node
 
 @export var total_oxygen: float
 
-@onready var oxygen_label: Label = %OxygenLabel
+@onready var oxygen_level: TextureProgressBar = %OxygenLevel
 @onready var oxygen_timer: Timer = %OxygenTimer
 
 var player_reached_exit: bool = false
@@ -22,13 +22,14 @@ func _process(_delta: float) -> void:
 		oxygen_timer.stop()
 		return
 		
-	var oxygen_level:float = roundf(oxygen_timer.time_left / total_oxygen * 100)
-	oxygen_label.text = "Oxygen: " + str(oxygen_level) + "%"
-	if oxygen_level == 0:
+	var oxygen_level_percentage:float = roundf(oxygen_timer.time_left / total_oxygen * 100)
+	#oxygen_label.text = "Oxygen: " + str(oxygen_level) + "%"
+	oxygen_level.value = oxygen_level_percentage
+	if oxygen_level_percentage == 0:
 		pass
-	elif (oxygen_level < 20): 
+	elif (oxygen_level_percentage < 20): 
 		pass
-	elif oxygen_level < 40:
+	elif oxygen_level_percentage < 40:
 		pass
 	
 

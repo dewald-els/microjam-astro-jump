@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://ds6i16k6x36ol"]
+[gd_scene load_steps=18 format=3 uid="uid://ds6i16k6x36ol"]
 
 [ext_resource type="PackedScene" uid="uid://sjhnnyj383b3" path="res://scenes/player/player.tscn" id="1_1cdke"]
 [ext_resource type="TileSet" uid="uid://bvugbhh5qmfak" path="res://resources/tiles/tile_set.tres" id="1_faw8n"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_vqf2h"]
+[ext_resource type="PackedScene" uid="uid://c3ci3erc0ml0d" path="res://scenes/oxygen-progress/oxygen_progress.tscn" id="2_kttvn"]
 [ext_resource type="PackedScene" uid="uid://c26imya6om8te" path="res://managers/oxygen_manager/oxygen_manager.tscn" id="2_sr6fs"]
 [ext_resource type="PackedScene" uid="uid://bn56uuir7ip7j" path="res://scenes/camera/camera_2d.tscn" id="3_pvuye"]
 [ext_resource type="PackedScene" uid="uid://bdhng6fu0hao3" path="res://scenes/oxygen/oxygen.tscn" id="6_iac81"]
@@ -67,14 +68,11 @@ script = ExtResource("1_vqf2h")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="OxygenLabel" type="Label" parent="UI"]
+[node name="OxygenLevel" parent="UI" instance=ExtResource("2_kttvn")]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Oxygen: 100%"
 
 [node name="OxygenManager" parent="." instance=ExtResource("2_sr6fs")]
-total_oxygen = 10.0
+total_oxygen = 20.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
 position = Vector2(240, 2.08165e-12)
@@ -102,7 +100,8 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
 z_index = 1
-position = Vector2(216, -688)
+position = Vector2(137, 192)
+enabled_debug_labels = false
 jump_height = 68.0
 jump_time_to_peak = 0.35
 jump_time_to_descent = 0.3
