@@ -28,7 +28,7 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = direction * (force * 0.5) if direction < 0 else direction * (force * 1.75)
 	elif force_direction == "Up":
 		player.velocity.y = lerp(player.velocity.y, -force, 0.7)
-		player.apply_movement(direction, player.base_move_speed)
+		player.apply_movement(direction, delta)
 	
 	
 	

@@ -9,8 +9,7 @@ var emitted: bool = false
 func enter(_msg: Dictionary = {}) -> void:
 	print("Entered Dead Playing sprite")
 	player.animated_sprite.play("dead")
-	player.velocity.y = lerp(player.velocity.y, -100.0, 0.65)
-
+	player.motion = Vector2.ZERO
 
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=35 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scenes/player/states/dead.gd" id="9_hm1uk"]
 [ext_resource type="Texture2D" uid="uid://cipbuj7va86ru" path="res://scenes/player/sprites/jump.png" id="9_k12ar"]
 [ext_resource type="Texture2D" uid="uid://b0sx3p1sm4wcv" path="res://scenes/player/sprites/dead.png" id="10_e6hqv"]
+[ext_resource type="Script" path="res://scenes/player/states/finish.gd" id="10_gfnmp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_07jb5"]
 atlas = ExtResource("10_e6hqv")
@@ -171,8 +172,9 @@ enabled_debug_labels = true
 jump_height = 100.0
 jump_time_to_peak = 0.27
 jump_time_to_descent = 0.32
-acceleration = 80.0
-base_move_speed = 150.0
+acceleration = 1000.0
+deceleration = 500.0
+move_speed = 110.0
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -184,25 +186,26 @@ script = ExtResource("2_i5518")
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("4_sx4pp")
-move_speed = 150.0
+move_speed = 1500.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_4v16n")
-move_speed = 150.0
 
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource("6_7mn1x")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("7_346lg")
-move_speed = 150.0
 
 [node name="Pushed" type="Node" parent="StateMachine"]
 script = ExtResource("8_1hr2m")
-move_speed = 200.0
+move_speed = 100.0
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("9_hm1uk")
+
+[node name="Finish" type="Node" parent="StateMachine"]
+script = ExtResource("10_gfnmp")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

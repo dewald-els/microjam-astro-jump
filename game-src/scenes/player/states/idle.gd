@@ -18,9 +18,12 @@ func physics_update(delta: float) -> void:
 		
 	player.was_on_floor = player.is_on_floor()
 	
-	if player.state_machine.get_state_name() == "Idle":
-		player.apply_movement(0, player.base_move_speed)
+	if player.state_machine.get_state_name() == player.States.Idle:
+		player.apply_movement(0, delta)
 	
 	player.apply_gravity(delta)
 	player.move_and_slide()
 		
+
+func exit(_msg: Dictionary = {}) -> void:
+	pass

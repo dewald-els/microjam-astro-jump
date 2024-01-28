@@ -1,10 +1,32 @@
 class_name Player
 extends CharacterBody2D
+
+enum PlayerState {
+	Idle,
+	Run,
+	Jump,
+	Die,
+	Fall,
+	Pushed,
+	Dead,
+	Finish
+}
+
+const States: Dictionary = {
+	Idle = "Idle",
+	Run = "Run",
+	Jump = "Jump",
+	Die = "Die",
+	Dead = "Dead",
+	Fall = "Fall",
+	Pushed = "Pushed",
+	Finish = "Finish",
+}
+
 @onready var state_machine: StateMachine = %StateMachine
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
-
 
 # Debug
 @export_category("Debug")
@@ -21,7 +43,9 @@ extends CharacterBody2D
 
 @export_category("Move")
 @export var acceleration: float
-@export var base_move_speed: float
+@export var deceleration: float 
+@export var move_speed: float
+
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -29,30 +53,15 @@ extends CharacterBody2D
 const jump_drag_multiplier: int = 3
 
 var was_on_floor: bool = false
+var motion: Vector2 = Vector2.ZERO
 
-enum PlayerState {
-	Idle,
-	Run,
-	Jump,
-	Die,
-	Fall,
-	Pushed,
-	Dead
-}
 
-const States: Dictionary = {
-	Idle = "Idle",
-	Run = "Run",
-	Jump = "Jump",
-	Die = "Die",
-	Fall = "Fall",
-	Pushed = "Pushed"
-}
 
 func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
 	SignalBus.connect("oxygen_depleted", on_oxygen_depleted)
+	SignalBus.connect("player_reached_exit", on_player_reached_exit)
 	if not enabled_debug_labels:
 		label.visible = false
 		label_vel.visible = false
@@ -72,19 +81,21 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 
 	match state:
 		PlayerState.Idle:
-			state_machine.transition_to("Idle", _msg)
+			state_machine.transition_to(States.Idle, _msg)
 		PlayerState.Run:
-			state_machine.transition_to("Run", _msg)
+			state_machine.transition_to(States.Run, _msg)
 		PlayerState.Jump:
-			state_machine.transition_to("Jump", _msg)
+			state_machine.transition_to(States.Jump, _msg)
 		PlayerState.Die:
-			state_machine.transition_to("Die", _msg)
+			state_machine.transition_to(States.Die, _msg)
 		PlayerState.Fall:
-			state_machine.transition_to("Fall", _msg)
+			state_machine.transition_to(States.Fall, _msg)
 		PlayerState.Pushed:
-			state_machine.transition_to("Pushed", _msg)
+			state_machine.transition_to(States.Pushed, _msg)
 		PlayerState.Dead:
-			state_machine.transition_to("Dead", _msg)
+			state_machine.transition_to(States.Dead, _msg)
+		PlayerState.Finish:
+			state_machine.transition_to(States.Finish, _msg)
 		_:
 			state_machine.transition_to("Idle", _msg)
 
@@ -117,16 +128,13 @@ func face_movement_direction(direction: float) -> void:
 func jump() -> void:
 	velocity.y = lerp(velocity.y, jump_velocity, jump_smoothing)
 
-func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
-	var motion: Vector2 = Vector2.ZERO
-	
-	print(direction)
+func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
 	if direction == 0:
-		motion.x = lerp(velocity.x, 0.0, 0.2)
+		motion.x = lerp(velocity.x * delta, 0.0, deceleration / 100)
 	elif direction == 1:
-		motion.x = min(motion.x + acceleration, move_speed)
+		motion.x = lerp(motion.x, min(motion.x + acceleration * delta, move_speed), 0.25)
 	elif direction == -1:
-		motion.x = max(motion.x - acceleration, -move_speed)
+		motion.x = lerp(motion.x, max(motion.x - acceleration * delta, -move_speed), 0.25)
 	
 	velocity.x = motion.x
 
@@ -143,3 +151,7 @@ func on_player_exited_fan_zone(direction: String) -> void:
 		await get_tree().create_timer(0.20).timeout
 	
 	change_state(PlayerState.Fall)
+	
+
+func on_player_reached_exit() -> void:
+	change_state(PlayerState.Finish)
