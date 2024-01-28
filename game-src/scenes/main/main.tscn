@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ds6i16k6x36ol"]
+[gd_scene load_steps=19 format=3 uid="uid://ds6i16k6x36ol"]
 
 [ext_resource type="PackedScene" uid="uid://sjhnnyj383b3" path="res://scenes/player/player.tscn" id="1_1cdke"]
 [ext_resource type="TileSet" uid="uid://bvugbhh5qmfak" path="res://resources/tiles/tile_set.tres" id="1_faw8n"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhng6fu0hao3" path="res://scenes/oxygen/oxygen.tscn" id="6_iac81"]
 [ext_resource type="PackedScene" uid="uid://d1b8jqlact8a6" path="res://scenes/fan/fan.tscn" id="6_n1o1k"]
 [ext_resource type="PackedScene" uid="uid://dss00hhebmiik" path="res://scenes/finish/finish.tscn" id="8_slr4t"]
+[ext_resource type="PackedScene" uid="uid://d0vp6ovol4ouc" path="res://scenes/danger/spike/spike.tscn" id="10_yhy40"]
 
 [sub_resource type="Curve" id="Curve_duibd"]
 min_value = -200.0
@@ -142,3 +143,8 @@ position = Vector2(336, -688)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Finish"]
 position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_0dkib")
+
+[node name="Spikes" type="Node" parent="."]
+
+[node name="Spike" parent="Spikes" instance=ExtResource("10_yhy40")]
+position = Vector2(358, 128)

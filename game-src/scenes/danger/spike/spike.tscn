@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0vp6ovol4ouc"]
+
+[ext_resource type="Texture2D" uid="uid://dqw6m56nvc2s2" path="res://scenes/danger/spike/sprites/idle.png" id="1_ojrdo"]
+[ext_resource type="Script" path="res://scenes/danger/spike/spike.gd" id="1_qewoi"]
+
+[node name="Spike" type="Area2D"]
+script = ExtResource("1_qewoi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("1_ojrdo")
