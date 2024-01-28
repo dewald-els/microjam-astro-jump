@@ -130,13 +130,17 @@ func jump() -> void:
 
 func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
 	if direction == 0:
-		motion.x = lerp(velocity.x * delta, 0.0, deceleration / 100)
+		velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
 	elif direction == 1:
-		motion.x = lerp(motion.x, min(motion.x + acceleration * delta, move_speed), 0.25)
+		velocity.x = max(
+			move_speed,
+			move_toward(velocity.x, velocity.x + acceleration, delta)
+		)
 	elif direction == -1:
-		motion.x = lerp(motion.x, max(motion.x - acceleration * delta, -move_speed), 0.25)
-	
-	velocity.x = motion.x
+		velocity.x = min(
+			-move_speed,
+			move_toward(velocity.x, velocity.x - acceleration, delta)
+		)
 
 # Events
 

@@ -172,9 +172,9 @@ enabled_debug_labels = true
 jump_height = 100.0
 jump_time_to_peak = 0.27
 jump_time_to_descent = 0.32
-acceleration = 1000.0
-deceleration = 500.0
-move_speed = 110.0
+acceleration = 350.0
+deceleration = 750.0
+move_speed = 95.0
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
