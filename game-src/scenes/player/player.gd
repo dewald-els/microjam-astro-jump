@@ -7,16 +7,21 @@ extends CharacterBody2D
 
 
 # Debug
+@export_category("Debug")
 @onready var label: Label = %DebugLabel
 @onready var label_vel: Label = %DebugVelLabel
 @export var enabled_debug_labels: bool = false
 
+@export_category("Jump")
 # Jump Mechanics: https://www.youtube.com/watch?v=IOe1aGY6hXA
 @export var jump_height: float
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
-@export var base_move_speed: float
 @export_range(0.0, 1.0) var jump_smoothing: float
+
+@export_category("Move")
+@export var acceleration: float
+@export var base_move_speed: float
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -113,10 +118,17 @@ func jump() -> void:
 	velocity.y = lerp(velocity.y, jump_velocity, jump_smoothing)
 
 func apply_movement(direction: int = 0, move_speed: float = 0.0) -> void:
+	var motion: Vector2 = Vector2.ZERO
+	
+	print(direction)
 	if direction == 0:
-		velocity.x = move_toward(velocity.x, 0, move_speed)
-	else:
-		velocity.x = direction * move_speed
+		motion.x = lerp(velocity.x, 0.0, 0.2)
+	elif direction == 1:
+		motion.x = min(motion.x + acceleration, move_speed)
+	elif direction == -1:
+		motion.x = max(motion.x - acceleration, -move_speed)
+	
+	velocity.x = motion.x
 
 # Events
 

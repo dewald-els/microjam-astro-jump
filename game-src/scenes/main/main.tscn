@@ -76,10 +76,9 @@ total_oxygen = 20.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
 position = Vector2(240, 2.08165e-12)
-drag_left_margin = 0.4
-drag_top_margin = 0.4
-drag_right_margin = 0.4
-drag_bottom_margin = 0.4
+drag_vertical_enabled = true
+drag_top_margin = 0.35
+drag_bottom_margin = 0.35
 follow = NodePath("../Player")
 smoothing_distance = 2
 

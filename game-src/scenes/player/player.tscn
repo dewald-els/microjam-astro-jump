@@ -171,6 +171,7 @@ enabled_debug_labels = true
 jump_height = 100.0
 jump_time_to_peak = 0.27
 jump_time_to_descent = 0.32
+acceleration = 80.0
 base_move_speed = 150.0
 
 [node name="StateMachine" type="Node" parent="."]
