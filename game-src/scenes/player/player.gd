@@ -59,7 +59,7 @@ const States: Dictionary = {
 @onready var move_stop_friction: float = 2.0 * move_distance / pow(2, move_time_to_stop_distance)
 
 var was_on_floor: bool = false
-var motion: Vector2 = Vector2.ZERO
+var previous_direction: int = 0
 
 
 
@@ -109,6 +109,9 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 
 # Common actions
 func apply_gravity(delta: float) -> void:
+	if is_on_floor():
+		return
+		
 	if velocity.y < 0 && !Input.is_action_pressed("player_jump"): # Low Jump
 		velocity.y += get_gravity() * jump_drag_multiplier * delta
 	else: # Regular Jump
@@ -136,7 +139,7 @@ func face_movement_direction(direction: float) -> void:
 func jump() -> void:
 	velocity.y = jump_velocity
 
-func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
+func apply_movement(direction: int = 0, delta: float = 0.0) -> void:	
 	if direction == 0:
 		if velocity.x > 0.0:
 			velocity.x = max(velocity.x - move_velocity * move_stop_friction * delta, 0)
@@ -145,9 +148,13 @@ func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
 		else:
 			velocity.x = 0.0
 	elif abs(velocity.x) < max_velocity:
+		if previous_direction != direction: # Quick Turn
+			velocity.x = 0.0
 		velocity.x = velocity.x + (move_velocity * move_friction) * direction * delta
 	else:
 		velocity.x = max_velocity * direction
+		
+	previous_direction = direction
 
 # Events
 
