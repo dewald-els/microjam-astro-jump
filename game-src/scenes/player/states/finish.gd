@@ -8,8 +8,6 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.animated_sprite.play(player.States.Idle)
 	
 	
-func physics_update(delta: float) -> void:
-	if not player.is_on_floor():
-		player.apply_gravity(delta)
-		
+func physics_update(delta: float) -> void:		
+	player.apply_gravity(delta)
 	player.apply_movement(0, delta)

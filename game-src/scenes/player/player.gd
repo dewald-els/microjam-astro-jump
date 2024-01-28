@@ -39,18 +39,24 @@ const States: Dictionary = {
 @export var jump_height: float
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
-@export_range(0.0, 1.0) var jump_smoothing: float
+@export var jump_drag_multiplier: float
 
 @export_category("Move")
-@export var acceleration: float
-@export var deceleration: float 
-@export var move_speed: float
+@export var move_distance: float # Number of Pixels in Move Time To Distance
+@export var move_time_to_distance: float
+@export var move_stop_distance: float
+@export var move_time_to_stop_distance: float
+@export var max_velocity: float
 
-
+# Jump Calculations
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-const jump_drag_multiplier: int = 3
+
+# Move Calculations
+@onready var move_velocity: float = 2.0 * move_distance / move_time_to_distance
+@onready var move_friction: float = 2.0 * move_distance / pow(2, move_time_to_distance)
+@onready var move_stop_friction: float = 2.0 * move_distance / pow(2, move_time_to_stop_distance)
 
 var was_on_floor: bool = false
 var motion: Vector2 = Vector2.ZERO
@@ -65,6 +71,8 @@ func _ready() -> void:
 	if not enabled_debug_labels:
 		label.visible = false
 		label_vel.visible = false
+
+	label_vel.text = "Move: " + str(move_velocity) + "\nMove Friction: " + str(move_friction)
 
 func _process(_delta: float) -> void:
 	label_vel.text = str(velocity)
@@ -126,21 +134,20 @@ func face_movement_direction(direction: float) -> void:
 		scale.x = scale.y * -1
 		
 func jump() -> void:
-	velocity.y = lerp(velocity.y, jump_velocity, jump_smoothing)
+	velocity.y = jump_velocity
 
 func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
 	if direction == 0:
-		velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
-	elif direction == 1:
-		velocity.x = max(
-			move_speed,
-			move_toward(velocity.x, velocity.x + acceleration, delta)
-		)
-	elif direction == -1:
-		velocity.x = min(
-			-move_speed,
-			move_toward(velocity.x, velocity.x - acceleration, delta)
-		)
+		if velocity.x > 0.0:
+			velocity.x = max(velocity.x - move_velocity * move_stop_friction * delta, 0)
+		elif velocity.x < 0.0:
+			velocity.x = min(velocity.x + move_velocity * move_stop_friction * delta, 0)
+		else:
+			velocity.x = 0.0
+	elif abs(velocity.x) < max_velocity:
+		velocity.x = velocity.x + (move_velocity * move_friction) * direction * delta
+	else:
+		velocity.x = max_velocity * direction
 
 # Events
 

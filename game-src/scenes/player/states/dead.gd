@@ -9,7 +9,7 @@ var emitted: bool = false
 func enter(_msg: Dictionary = {}) -> void:
 	print("Entered Dead Playing sprite")
 	player.animated_sprite.play("dead")
-	player.motion = Vector2.ZERO
+	player.velocity = Vector2.ZERO
 
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
