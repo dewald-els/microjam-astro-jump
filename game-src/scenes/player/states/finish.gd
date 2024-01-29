@@ -5,7 +5,7 @@ extends State
 
 func enter(_msg: Dictionary = {}) -> void:
 	print("Entered Finish")
-	player.animated_sprite.play(player.States.Idle)
+	player.animated_sprite.play("idle")
 	
 	
 func physics_update(delta: float) -> void:		
