@@ -166,12 +166,23 @@ func on_oxygen_depleted() -> void:
 	change_state(PlayerState.Die)
 
 func on_player_entered_fan_zone(force: float, force_direction: String) -> void:
+	var current_state: String = state_machine.get_state_name()
+	
+	if  current_state == States.Dead or current_state == States.Die:
+		return
+	
 	change_state(PlayerState.Pushed, { "force": force, "force_direction": force_direction })
 
 func on_player_exited_fan_zone(direction: String) -> void:
+	
+	var current_state: String = state_machine.get_state_name()
+	
+	if current_state == States.Dead or current_state == States.Die:
+		return
+		
 	if direction == "Up": # Allow velocity to normalise
 		await get_tree().create_timer(0.20).timeout
-	
+		
 	change_state(PlayerState.Fall)
 	
 
