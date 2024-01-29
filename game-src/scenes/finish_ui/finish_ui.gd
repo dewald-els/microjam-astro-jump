@@ -1,12 +1,12 @@
-class_name RetryScreen
+class_name FinishScreen
 extends CanvasLayer
 
-@onready var retry_button: Button = %RetryButton
+@onready var play_again_button: Button = %PlayAgainButton
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	retry_button.connect("pressed", on_retry_pressed)
+	play_again_button.connect("pressed", on_retry_pressed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,10 +15,8 @@ func _process(_delta: float) -> void:
 		trigger_restart()
 
 func trigger_restart() -> void:
-	print("Restart trigger")
 	SignalBus.emit_signal("restart_level")
 
 
 func on_retry_pressed() -> void:
-	print("Button pressed")
 	trigger_restart()

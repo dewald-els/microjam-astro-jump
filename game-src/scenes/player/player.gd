@@ -61,13 +61,12 @@ const States: Dictionary = {
 var was_on_floor: bool = false
 var previous_direction: int = 0
 
-
-
 func _ready() -> void:
 	SignalBus.connect("player_entered_fan_zone", on_player_entered_fan_zone)
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
 	SignalBus.connect("oxygen_depleted", on_oxygen_depleted)
 	SignalBus.connect("player_reached_exit", on_player_reached_exit)
+	
 	if not enabled_debug_labels:
 		label.visible = false
 		label_vel.visible = false
@@ -149,7 +148,7 @@ func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
 			velocity.x = 0.0
 	elif abs(velocity.x) < max_velocity:
 		if previous_direction != direction: # Quick Turn
-			velocity.x = 0.0
+			velocity.x = lerp(velocity.x, 0.0, 0.2)
 		velocity.x = velocity.x + (move_velocity * move_friction) * direction * delta
 	else:
 		velocity.x = max_velocity * direction

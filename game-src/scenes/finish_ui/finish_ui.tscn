@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxnd23asa52wm"]
+
+[ext_resource type="Script" path="res://scenes/finish_ui/finish_ui.gd" id="1_y731e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4xpi"]
+bg_color = Color(0.960784, 0.823529, 0.721569, 1)
+
+[node name="FinishUI" type="CanvasLayer"]
+script = ExtResource("1_y731e")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "You made it. 
+You flew off in your ship to get a snack
+---"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.129412, 0.0980392, 0.235294, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_r4xpi")
+text = "Play Again"
