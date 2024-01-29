@@ -23,7 +23,3 @@ func physics_update(delta: float) -> void:
 	
 	player.apply_gravity(delta)
 	player.move_and_slide()
-		
-
-func exit(_msg: Dictionary = {}) -> void:
-	pass

@@ -39,7 +39,7 @@ const States: Dictionary = {
 @export var jump_height: float
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
-@export var jump_drag_multiplier: float
+@export var low_jump_multiplier: float
 
 @export_category("Move")
 @export var move_distance: float # Number of Pixels in Move Time To Distance
@@ -113,7 +113,7 @@ func apply_gravity(delta: float) -> void:
 		return
 		
 	if velocity.y < 0 && !Input.is_action_pressed("player_jump"): # Low Jump
-		velocity.y += get_gravity() * jump_drag_multiplier * delta
+		velocity.y += get_gravity() * low_jump_multiplier * delta
 	else: # Regular Jump
 		velocity.y += get_gravity() * delta
 

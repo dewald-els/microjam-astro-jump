@@ -33,7 +33,6 @@ func physics_update(delta: float) -> void:
 	
 	# Coyote Timer
 	if player.was_on_floor and !player.is_on_floor():
-		player.label_vel.text = "started coyote"
 		player.coyote_timer.start()
 		
 	player.face_movement_direction(direction)

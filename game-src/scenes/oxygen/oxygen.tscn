@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bdhng6fu0hao3"]
+[gd_scene load_steps=28 format=3 uid="uid://bdhng6fu0hao3"]
 
 [ext_resource type="Texture2D" uid="uid://ja5apku7v6nh" path="res://scenes/oxygen/sprites/idle.png" id="1_6lrny"]
 [ext_resource type="Script" path="res://scenes/oxygen/oxygen.gd" id="1_rc1ff"]
@@ -191,6 +191,15 @@ _data = {
 "collect": SubResource("Animation_k4360")
 }
 
+[sub_resource type="Gradient" id="Gradient_32pkl"]
+colors = PackedColorArray(1, 1, 1, 0.866667, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5ubmu"]
+gradient = SubResource("Gradient_32pkl")
+fill = 1
+fill_from = Vector2(0.497863, 0.508547)
+fill_to = Vector2(0.504274, 0.831197)
+
 [node name="Oxygen" type="Area2D"]
 script = ExtResource("1_rc1ff")
 
@@ -208,3 +217,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_nkw57")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_5ubmu")
