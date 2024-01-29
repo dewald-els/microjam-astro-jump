@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=41 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -229,6 +229,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ok50q"]
 size = Vector2(10, 14)
 
+[sub_resource type="Gradient" id="Gradient_ia5hb"]
+offsets = PackedFloat32Array(0, 0.998358)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0kjj7"]
+gradient = SubResource("Gradient_ia5hb")
+fill = 1
+fill_from = Vector2(0.497863, 0.49359)
+fill_to = Vector2(0.863248, 0.82906)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
 enabled_debug_labels = true
@@ -278,6 +288,7 @@ libraries = {
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+light_mask = 0
 position = Vector2(2.08165e-12, -11)
 scale = Vector2(0.98, 1.05)
 sprite_frames = SubResource("SpriteFrames_wpup6")
@@ -317,3 +328,11 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+light_mask = 2
+position = Vector2(0, -11)
+scale = Vector2(1.64062, 1.61904)
+color = Color(1, 1, 1, 0.67451)
+texture = SubResource("GradientTexture2D_0kjj7")

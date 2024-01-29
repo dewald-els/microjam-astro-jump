@@ -99,11 +99,10 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
 z_index = 1
-position = Vector2(137, 192)
+position = Vector2(309, -16)
 enabled_debug_labels = false
 jump_height = 52.0
 jump_time_to_peak = 0.36
-jump_time_to_descent = 0.3
 low_jump_multiplier = 4.6
 move_distance = 13.0
 move_time_to_distance = 0.25
@@ -132,7 +131,7 @@ position = Vector2(60, 0.5)
 shape = SubResource("RectangleShape2D_70d4h")
 
 [node name="Oxygen" parent="." instance=ExtResource("6_iac81")]
-position = Vector2(323, -46)
+position = Vector2(324, -65)
 
 [node name="Oxygen2" parent="." instance=ExtResource("6_iac81")]
 position = Vector2(325, -562)
