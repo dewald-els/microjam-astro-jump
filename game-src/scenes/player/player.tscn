@@ -335,4 +335,5 @@ light_mask = 2
 position = Vector2(0, -11)
 scale = Vector2(1.64062, 1.61904)
 color = Color(1, 1, 1, 0.67451)
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_0kjj7")
