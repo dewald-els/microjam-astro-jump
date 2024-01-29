@@ -213,8 +213,9 @@ shape = SubResource("CircleShape2D_8r2pw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_h0k48")
-animation = &"collect"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.634603
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -223,6 +224,7 @@ libraries = {
 }
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_5ubmu")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
@@ -230,3 +232,16 @@ unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_3ykq8")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+explosiveness = 0.15
+randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 20.0
+gravity = Vector2(2.08165e-12, -10)
+angular_velocity_min = 1.0
+angular_velocity_max = 3.0
+radial_accel_min = 0.5
+radial_accel_max = 1.0
+color = Color(1, 1, 1, 0.0666667)
