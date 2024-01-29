@@ -9,6 +9,18 @@ extends Camera2D
 @export_range(0.1, 1.0) var zoom_speed: float = 1.0
 
 
+
+@export var shake_noise: Noise
+@export var shake_decay: int = 3
+
+var x_noise_sample_vector: Vector2 = Vector2.RIGHT
+var y_noise_sample_vector: Vector2 = Vector2.DOWN
+var noise_sample_travel_rate: int = 500
+var max_shake_offset: int = 10
+var current_shake_percentage: float = 0
+var x_noise_sample_position: Vector2 = Vector2.ZERO
+var y_noise_sample_position: Vector2 = Vector2.ZERO
+
 var zoom_to_finish: bool = false
 var weight: float
 var zoom_weight: float
@@ -16,6 +28,7 @@ var zoom_weight: float
 
 func _ready() -> void:
 	SignalBus.connect("player_reached_exit", on_player_reached_exit)
+	SignalBus.connect("camera_shake", on_apply_shake)
 	
 	weight = float(11 - smoothing_distance) / 100
 	zoom_weight = zoom_speed * 2.0
@@ -27,6 +40,9 @@ func _process(delta: float) -> void:
 		global_position = _get_camera_position()
 	elif follow:
 		global_position.y = _get_camera_position().y
+		
+	if (current_shake_percentage > 0):
+		_process_shake(delta)
 
 
 func _get_camera_position() -> Vector2:
@@ -42,3 +58,20 @@ func _get_camera_position() -> Vector2:
 func on_player_reached_exit() -> void:
 	zoom_to_finish = true
 	
+
+func _process_shake(delta: float) -> void:
+	x_noise_sample_position += x_noise_sample_vector * noise_sample_travel_rate * delta
+	y_noise_sample_position += y_noise_sample_vector * noise_sample_travel_rate * delta
+	var x_sample: float = shake_noise.get_noise_2d(x_noise_sample_position.x, x_noise_sample_position.y)
+	var y_sample: float = shake_noise.get_noise_2d(y_noise_sample_position.x, y_noise_sample_position.y)
+	
+	var shake_offset: Vector2 = Vector2(x_sample, y_sample) * max_shake_offset * pow(current_shake_percentage, 2)
+	offset = shake_offset
+	current_shake_percentage = clamp(current_shake_percentage - shake_decay * delta, 0, 1)
+
+func apply_shake(percentage: float, decay: int = 3) -> void:
+	shake_decay = decay
+	current_shake_percentage = clamp(current_shake_percentage + percentage, 0, 1)
+	
+func on_apply_shake(percentage: float) -> void:
+	apply_shake(percentage)

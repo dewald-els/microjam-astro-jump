@@ -9,3 +9,5 @@ signal oxygen_depleted
 signal oxygen_collect(oxygen_value: float)
 
 signal restart_level
+
+signal camera_shake(shake_percentage: float)

@@ -8,6 +8,7 @@ func _ready() -> void:
 	SignalBus.connect("player_reached_exit", on_player_reached_exit)
 	SignalBus.connect("restart_level", on_restart_level)
 
+
 func on_player_dead() -> void:
 	var retry_instance: RetryScreen = retry_scene.instantiate()
 	add_child(retry_instance)
