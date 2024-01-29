@@ -9,7 +9,8 @@ enum PlayerState {
 	Fall,
 	Pushed,
 	Dead,
-	Finish
+	Finish,
+	Land
 }
 
 const States: Dictionary = {
@@ -21,12 +22,14 @@ const States: Dictionary = {
 	Fall = "Fall",
 	Pushed = "Pushed",
 	Finish = "Finish",
+	Land = "Land"
 }
 
 @onready var state_machine: StateMachine = %StateMachine
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 # Debug
 @export_category("Debug")
@@ -93,6 +96,8 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 			state_machine.transition_to(States.Run, _msg)
 		PlayerState.Jump:
 			state_machine.transition_to(States.Jump, _msg)
+		PlayerState.Land:
+			state_machine.transition_to(States.Land, _msg)
 		PlayerState.Die:
 			state_machine.transition_to(States.Die, _msg)
 		PlayerState.Fall:

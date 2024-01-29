@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=39 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/player/states/run.gd" id="4_sx4pp"]
 [ext_resource type="Script" path="res://scenes/player/states/jump.gd" id="5_4v16n"]
 [ext_resource type="Script" path="res://scenes/player/states/die.gd" id="6_7mn1x"]
+[ext_resource type="Script" path="res://scenes/player/states/land.gd" id="6_uniqm"]
 [ext_resource type="Script" path="res://scenes/player/states/fall.gd" id="7_346lg"]
 [ext_resource type="Script" path="res://scenes/player/states/pushed.gd" id="8_1hr2m"]
 [ext_resource type="Texture2D" uid="uid://df2wopujy603u" path="res://scenes/player/sprites/die.png" id="9_8j8yn"]
@@ -15,6 +16,68 @@
 [ext_resource type="Texture2D" uid="uid://cipbuj7va86ru" path="res://scenes/player/sprites/jump.png" id="9_k12ar"]
 [ext_resource type="Texture2D" uid="uid://b0sx3p1sm4wcv" path="res://scenes/player/sprites/dead.png" id="10_e6hqv"]
 [ext_resource type="Script" path="res://scenes/player/states/finish.gd" id="10_gfnmp"]
+
+[sub_resource type="Animation" id="Animation_gnkc6"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.98, 1.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -11)]
+}
+
+[sub_resource type="Animation" id="Animation_ibxel"]
+resource_name = "land"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.1, 0.8), Vector2(0.9, 1.05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -8), Vector2(2.08165e-12, -11), Vector2(2.08165e-12, -10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7dttp"]
+_data = {
+"jump": SubResource("Animation_gnkc6"),
+"land": SubResource("Animation_ibxel")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_07jb5"]
 atlas = ExtResource("10_e6hqv")
@@ -188,6 +251,9 @@ move_speed = 1500.0
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_4v16n")
 
+[node name="Land" type="Node" parent="StateMachine"]
+script = ExtResource("6_uniqm")
+
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource("6_7mn1x")
 
@@ -204,9 +270,16 @@ script = ExtResource("9_hm1uk")
 [node name="Finish" type="Node" parent="StateMachine"]
 script = ExtResource("10_gfnmp")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_7dttp")
+}
+
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -10)
+position = Vector2(2.08165e-12, -11)
+scale = Vector2(0.98, 1.05)
 sprite_frames = SubResource("SpriteFrames_wpup6")
 animation = &"idle"
 autoplay = "idle"

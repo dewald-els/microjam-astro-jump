@@ -8,10 +8,11 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.label.text = "Jump"
 	player.jump()
 	player.coyote_timer.stop()
+	player.animation_player.play("jump")
 	
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
-		player.change_state(player.PlayerState.Idle)
+		player.change_state(player.PlayerState.Land)
 	if player.velocity.y > 0.0 and not player.is_on_floor():
 		player.change_state(player.PlayerState.Fall)
 	

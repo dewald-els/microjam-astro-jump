@@ -12,7 +12,7 @@ func physics_update(delta: float) -> void:
 	if player.is_on_floor() and !player.jump_buffer_timer.is_stopped():
 		player.change_state(player.PlayerState.Jump)
 	elif player.is_on_floor():
-		player.change_state(player.PlayerState.Idle)
+		player.change_state(player.PlayerState.Land)
 	
 	if Input.is_action_just_pressed("player_jump"):
 		player.jump_buffer_timer.start()
