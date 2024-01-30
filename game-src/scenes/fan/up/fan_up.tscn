@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4i0xjjipn8o8"]
+
+[ext_resource type="Script" path="res://scenes/fan/fan.gd" id="1_bkbdt"]
+[ext_resource type="Texture2D" uid="uid://qwj0ffofpxkf" path="res://scenes/fan/sprites/fan.png" id="2_gauh6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kttv"]
+atlas = ExtResource("2_gauh6")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37044"]
+atlas = ExtResource("2_gauh6")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j30yn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kttv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37044")
+}],
+"loop": true,
+"name": &"On",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_ajy0k"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2tqia"]
+gradient = SubResource("Gradient_ajy0k")
+fill_from = Vector2(0.497863, 0)
+fill_to = Vector2(0.512821, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_71mx0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 1, 1)
+spread = 0.0
+gravity = Vector3(2.08165e-12, -320, 2.08165e-12)
+linear_accel_min = 150.0
+linear_accel_max = 250.0
+scale_min = 0.5
+color = Color(0.960784, 0.823529, 0.721569, 1)
+turbulence_noise_scale = 1.15
+
+[node name="Fan" type="Area2D"]
+script = ExtResource("1_bkbdt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_j30yn")
+animation = &"On"
+autoplay = "On"
+frame_progress = 0.0700243
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(8.34465e-07, -46.5)
+scale = Vector2(0.5, 1.01562)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2tqia")
+
+[node name="WindParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_71mx0")

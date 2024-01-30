@@ -1,15 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1b8jqlact8a6"]
+[gd_scene load_steps=9 format=3 uid="uid://d1b8jqlact8a6"]
 
 [ext_resource type="Texture2D" uid="uid://qwj0ffofpxkf" path="res://scenes/fan/sprites/fan.png" id="1_5wi8o"]
 [ext_resource type="Script" path="res://scenes/fan/fan.gd" id="1_dyrwn"]
 
 [sub_resource type="Gradient" id="Gradient_fiu1q"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.819608)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.819608)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k4wsa"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pg7h5"]
 gradient = SubResource("Gradient_fiu1q")
-fill_from = Vector2(1, 1)
-fill_to = Vector2(0, 1)
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(0, 0.561966)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kttv"]
 atlas = ExtResource("1_5wi8o")
@@ -33,17 +33,30 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gp0il"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2.08165e-12, 16, 1)
+spread = 0.0
+gravity = Vector3(320, 2.08165e-12, 2.08165e-12)
+scale_min = 0.5
+color = Color(0.960784, 0.823529, 0.721569, 1)
+
 [node name="Fan" type="Area2D"]
 script = ExtResource("1_dyrwn")
-direction = 2
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(42, 0)
-scale = Vector2(1.125, 0.5)
-texture = SubResource("GradientTexture2D_k4wsa")
+position = Vector2(83.5, 0)
+scale = Vector2(2.42188, 0.5)
+texture = SubResource("GradientTexture2D_pg7h5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j30yn")
 animation = &"On"
 autoplay = "On"
 frame_progress = 0.0700243
+
+[node name="WindParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_gp0il")

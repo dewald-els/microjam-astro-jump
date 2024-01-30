@@ -8,30 +8,32 @@ enum FanDirection {
 
 @export var fan_power: float
 @export var direction: FanDirection
-@export var gpu_particles_scene: PackedScene
+
+
+@onready var particles: GPUParticles2D = %WindParticles
+
 
 var direction_name: String
 
 func _ready() -> void:
 	connect("body_entered", on_body_entered)
 	connect("body_exited", on_body_exited)
+	particles.emitting = true
 
-	var gpu_particles: GPUParticles2D = gpu_particles_scene.instantiate()
-	add_child(gpu_particles)
 
 	match direction:
 		FanDirection.Up:
 			direction_name = "Up"
-			gpu_particles.process_material.set("gravity", Vector3(0, -98, 0))
+			
 		FanDirection.Left:
 			direction_name = "Left"
-			gpu_particles.process_material.set("gravity", Vector3(-98, 0, 0))
+			
 		FanDirection.Right:
 			direction_name = "Right"
-			gpu_particles.process_material.set("gravity", Vector3(98, 0, 0))
+			
 		_:
 			direction_name = "Right"
-			gpu_particles.process_material.set("gravity", Vector3(98, 0, 0))
+			
 
 func on_body_entered(body: Node2D) -> void:
 	if "Player" in body.name:
