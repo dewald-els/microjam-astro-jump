@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=45 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -16,9 +16,38 @@
 [ext_resource type="Texture2D" uid="uid://cipbuj7va86ru" path="res://scenes/player/sprites/jump.png" id="9_k12ar"]
 [ext_resource type="Texture2D" uid="uid://b0sx3p1sm4wcv" path="res://scenes/player/sprites/dead.png" id="10_e6hqv"]
 [ext_resource type="Script" path="res://scenes/player/states/finish.gd" id="10_gfnmp"]
+[ext_resource type="Texture2D" uid="uid://codu5q1fcetdm" path="res://scenes/player/sprites/fall.png" id="14_5katr"]
 
-[sub_resource type="Animation" id="Animation_gnkc6"]
-resource_name = "jump"
+[sub_resource type="Animation" id="Animation_8vcmg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -10)]
+}
+
+[sub_resource type="Animation" id="Animation_siruf"]
+resource_name = "finish"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -26,16 +55,45 @@ tracks/0/path = NodePath("AnimatedSprite:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2.08165e-12, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gnkc6"]
+resource_name = "jump"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.98, 1.05)]
+"values": [Vector2(1, 1.1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("AnimatedSprite:position")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -75,6 +133,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7dttp"]
 _data = {
+"RESET": SubResource("Animation_8vcmg"),
+"finish": SubResource("Animation_siruf"),
 "jump": SubResource("Animation_gnkc6"),
 "land": SubResource("Animation_ibxel")
 }
@@ -115,6 +175,14 @@ region = Rect2(96, 0, 16, 20)
 atlas = ExtResource("9_8j8yn")
 region = Rect2(112, 0, 16, 20)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_37tmk"]
+atlas = ExtResource("14_5katr")
+region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l6ig"]
+atlas = ExtResource("14_5katr")
+region = Rect2(16, 0, 16, 20)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rlqcp"]
 atlas = ExtResource("4_2k60n")
 region = Rect2(0, 0, 16, 20)
@@ -126,10 +194,6 @@ region = Rect2(16, 0, 16, 20)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8nrb"]
 atlas = ExtResource("9_k12ar")
 region = Rect2(0, 0, 16, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdmvp"]
-atlas = ExtResource("9_k12ar")
-region = Rect2(16, 0, 16, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltt70"]
 atlas = ExtResource("1_m4xf8")
@@ -188,6 +252,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_37tmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l6ig")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rlqcp")
 }, {
 "duration": 1.0,
@@ -200,9 +275,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n8nrb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qdmvp")
 }],
 "loop": true,
 "name": &"jump",
@@ -229,15 +301,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ok50q"]
 size = Vector2(10, 14)
 
-[sub_resource type="Gradient" id="Gradient_ia5hb"]
-offsets = PackedFloat32Array(0, 0.998358)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+[sub_resource type="Gradient" id="Gradient_347xb"]
+offsets = PackedFloat32Array(0, 0.705566)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0kjj7"]
-gradient = SubResource("Gradient_ia5hb")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nh5x0"]
+gradient = SubResource("Gradient_347xb")
 fill = 1
-fill_from = Vector2(0.497863, 0.49359)
-fill_to = Vector2(0.863248, 0.82906)
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
@@ -289,10 +360,10 @@ libraries = {
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 light_mask = 0
-position = Vector2(2.08165e-12, -11)
-scale = Vector2(0.98, 1.05)
+position = Vector2(2.08165e-12, -10)
+rotation = 6.28319
 sprite_frames = SubResource("SpriteFrames_wpup6")
-animation = &"idle"
+animation = &"fall"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -330,10 +401,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-show_behind_parent = true
-light_mask = 2
 position = Vector2(0, -11)
 scale = Vector2(1.64062, 1.61904)
-color = Color(1, 1, 1, 0.67451)
 shadow_enabled = true
-texture = SubResource("GradientTexture2D_0kjj7")
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_nh5x0")

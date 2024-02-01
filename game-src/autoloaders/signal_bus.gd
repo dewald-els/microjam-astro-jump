@@ -10,4 +10,7 @@ signal oxygen_collect(oxygen_value: float)
 
 signal restart_level
 
-signal camera_shake(shake_percentage: float)
+signal camera_shake(shake_percentage: float, decay: float)
+signal camera_shake_completed
+
+signal finish_can_take_off

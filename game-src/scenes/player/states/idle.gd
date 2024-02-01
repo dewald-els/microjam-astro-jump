@@ -5,7 +5,6 @@ extends State
 
 
 func enter(_msg: Dictionary = {}) -> void:
-	
 	player.label.text = "Idle"
 	player.animated_sprite.play("idle")
 	player.coyote_timer.stop()

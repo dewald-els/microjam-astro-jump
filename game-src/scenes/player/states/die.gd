@@ -5,7 +5,7 @@ extends State
 func enter(_msg: Dictionary = {}) -> void:
 	player.animated_sprite.play("die")
 	player.velocity = Vector2.ZERO
-	SignalBus.emit_signal("camera_shake", 100.0)
+	SignalBus.emit_signal("camera_shake", 100.0, 3.0)
 
 func update(delta: float) -> void:
 	if not player.animated_sprite.is_playing():

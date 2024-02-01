@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dss00hhebmiik"]
+[gd_scene load_steps=7 format=3 uid="uid://dss00hhebmiik"]
 
 [ext_resource type="Script" path="res://scenes/finish/finish.gd" id="1_mifjk"]
 [ext_resource type="Texture2D" uid="uid://dlvmoxlv66bn7" path="res://scenes/finish/sprites/idle.png" id="2_y03ql"]
@@ -18,10 +18,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_mchhd"]
+offsets = PackedFloat32Array(0, 0.597846)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xtrdq"]
+gradient = SubResource("Gradient_mchhd")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Finish" type="Area2D"]
 script = ExtResource("1_mifjk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_xc3j1")
 animation = &"idle"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -12)
+color = Color(0.411765, 0.301961, 0.215686, 1)
+texture = SubResource("GradientTexture2D_xtrdq")

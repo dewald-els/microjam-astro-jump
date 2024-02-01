@@ -7,6 +7,7 @@ func _ready() -> void:
 	SignalBus.connect("player_dead", on_player_dead)
 	SignalBus.connect("player_reached_exit", on_player_reached_exit)
 	SignalBus.connect("restart_level", on_restart_level)
+	SignalBus.connect("camera_shake_completed", on_camera_shake_completed)
 
 
 func on_player_dead() -> void:
@@ -20,3 +21,6 @@ func on_player_reached_exit() -> void:
 func on_restart_level() -> void:
 	print("Restarting")
 	get_tree().reload_current_scene()
+	
+func on_camera_shake_completed() -> void:
+	pass

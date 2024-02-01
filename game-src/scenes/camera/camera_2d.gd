@@ -11,7 +11,7 @@ extends Camera2D
 
 
 @export var shake_noise: Noise
-@export var shake_decay: int = 3
+@export var shake_decay: float = 3.0
 
 var x_noise_sample_vector: Vector2 = Vector2.RIGHT
 var y_noise_sample_vector: Vector2 = Vector2.DOWN
@@ -68,10 +68,12 @@ func _process_shake(delta: float) -> void:
 	var shake_offset: Vector2 = Vector2(x_sample, y_sample) * max_shake_offset * pow(current_shake_percentage, 2)
 	offset = shake_offset
 	current_shake_percentage = clamp(current_shake_percentage - shake_decay * delta, 0, 1)
+	if current_shake_percentage == 0:
+		SignalBus.emit_signal("camera_shake_completed")
 
-func apply_shake(percentage: float, decay: int = 3) -> void:
+func apply_shake(percentage: float, decay: float = 3) -> void:
 	shake_decay = decay
 	current_shake_percentage = clamp(current_shake_percentage + percentage, 0, 1)
 	
-func on_apply_shake(percentage: float) -> void:
-	apply_shake(percentage)
+func on_apply_shake(percentage: float, decay: float) -> void:
+	apply_shake(percentage, decay)

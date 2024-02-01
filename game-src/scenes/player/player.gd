@@ -88,7 +88,7 @@ func is_coyote_timer_running() -> bool:
 	return !coyote_timer.is_stopped()
 
 func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
-
+	animation_player.play("RESET")
 	match state:
 		PlayerState.Idle:
 			state_machine.transition_to(States.Idle, _msg)

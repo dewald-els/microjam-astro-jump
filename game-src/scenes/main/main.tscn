@@ -29,7 +29,7 @@ script = ExtResource("1_vqf2h")
 unique_name_in_owner = true
 
 [node name="OxygenManager" parent="." instance=ExtResource("2_sr6fs")]
-total_oxygen = 20.0
+total_oxygen = 18.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
 position = Vector2(240, 2.08165e-12)
@@ -56,7 +56,7 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
 z_index = 1
-position = Vector2(138, 192)
+position = Vector2(139, 192)
 enabled_debug_labels = false
 jump_height = 52.0
 jump_time_to_peak = 0.36
@@ -98,3 +98,8 @@ position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_0dkib")
 
 [node name="Spikes" type="Node" parent="."]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+color = Color(0.670588, 0.705882, 0.513726, 1)
+blend_mode = 1

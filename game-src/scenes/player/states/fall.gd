@@ -6,6 +6,7 @@ extends State
 
 func enter(_msg: Dictionary = {}) -> void:
 	player.label.text = "Fall"
+	player.animated_sprite.play("fall")
 	
 
 func physics_update(delta: float) -> void:
