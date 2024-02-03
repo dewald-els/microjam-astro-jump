@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=46 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b0sx3p1sm4wcv" path="res://scenes/player/sprites/dead.png" id="10_e6hqv"]
 [ext_resource type="Script" path="res://scenes/player/states/finish.gd" id="10_gfnmp"]
 [ext_resource type="Texture2D" uid="uid://codu5q1fcetdm" path="res://scenes/player/sprites/fall.png" id="14_5katr"]
+[ext_resource type="Script" path="res://scenes/player/head_casts.gd" id="18_8g7ak"]
 
 [sub_resource type="Animation" id="Animation_8vcmg"]
 length = 0.001
@@ -408,3 +409,24 @@ energy = 0.6
 shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_nh5x0")
+
+[node name="HeadCasts" type="Node2D" parent="."]
+script = ExtResource("18_8g7ak")
+
+[node name="HeadCastLeft" type="RayCast2D" parent="HeadCasts"]
+unique_name_in_owner = true
+position = Vector2(-3, -12)
+rotation = -3.14159
+target_position = Vector2(2.08165e-12, 10)
+
+[node name="HeadCastCenter" type="RayCast2D" parent="HeadCasts"]
+unique_name_in_owner = true
+position = Vector2(2.08165e-12, -12)
+rotation = -3.14159
+target_position = Vector2(2.08165e-12, 10)
+
+[node name="HeadCastRight" type="RayCast2D" parent="HeadCasts"]
+unique_name_in_owner = true
+position = Vector2(3, -12)
+rotation = -3.14159
+target_position = Vector2(2.08165e-12, 10)

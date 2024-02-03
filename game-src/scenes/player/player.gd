@@ -78,7 +78,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	label_vel.text = str(velocity)
-	label.text = str(state_machine.state)
+	label.text = str(state_machine.state) + " - scale: " + str(scale.x) + "," + str(scale.y)
 
 func get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
