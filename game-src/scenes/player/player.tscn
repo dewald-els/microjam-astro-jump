@@ -302,7 +302,7 @@ animations = [{
 size = Vector2(10, 14)
 
 [sub_resource type="Gradient" id="Gradient_347xb"]
-offsets = PackedFloat32Array(0, 0.705566)
+offsets = PackedFloat32Array(0, 0.559524)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nh5x0"]
@@ -403,6 +403,8 @@ one_shot = true
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -11)
 scale = Vector2(1.64062, 1.61904)
+color = Color(0.921569, 0.494118, 0.462745, 1)
+energy = 0.6
 shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_nh5x0")

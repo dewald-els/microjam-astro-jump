@@ -29,7 +29,7 @@ script = ExtResource("1_vqf2h")
 unique_name_in_owner = true
 
 [node name="OxygenManager" parent="." instance=ExtResource("2_sr6fs")]
-total_oxygen = 18.0
+total_oxygen = 15.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
 position = Vector2(240, 2.08165e-12)
@@ -85,7 +85,7 @@ position = Vector2(0, -54.5)
 shape = SubResource("RectangleShape2D_ahi75")
 
 [node name="Oxygen" parent="." instance=ExtResource("6_iac81")]
-position = Vector2(324, -65)
+position = Vector2(324, -68)
 
 [node name="Oxygen2" parent="." instance=ExtResource("6_iac81")]
 position = Vector2(327, -603)

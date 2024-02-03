@@ -18,9 +18,11 @@ func physics_update(_delta: float) -> void:
 
 
 func enter(_msg: Dictionary = {}) -> void:
+	print("Entered state: ", state_machine.get_state_name())
 	pass
 
 
 func exit() -> void:
+	print("Exiting state: ", state_machine.get_state_name())
 	pass
 

@@ -8,7 +8,6 @@ signal transitioned(state_name: String)
 
 @onready var state: State = get_node(initial_state)
 
-
 func _ready() -> void:
 	await owner.ready
 
@@ -36,7 +35,7 @@ func _physics_process(delta: float) -> void:
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):
 		return
-
+	
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(msg)
