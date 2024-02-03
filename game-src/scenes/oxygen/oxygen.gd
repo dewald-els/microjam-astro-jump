@@ -3,6 +3,7 @@ extends Area2D
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var player_detection_area: Area2D = %PlayerDetection
+@onready var light: PointLight2D = %PointLight2D
 
 
 @export var oxygen_value: float = 30.0
@@ -32,3 +33,5 @@ func on_player_detected(body: Node2D) -> void:
 	print("Found player")
 	if "Player" in body.name:
 		player = body as Player
+		light.energy = 0.25
+		

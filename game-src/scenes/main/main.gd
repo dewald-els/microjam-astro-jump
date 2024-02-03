@@ -16,6 +16,7 @@ func on_player_dead() -> void:
 
 func on_player_reached_exit() -> void:
 	var finish_instance: FinishScreen = finish_scene.instantiate()
+	await get_tree().create_timer(2.0).timeout
 	add_child(finish_instance)
 
 func on_restart_level() -> void:
