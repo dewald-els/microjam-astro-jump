@@ -1,17 +1,22 @@
 extends Camera2D
 
-@export_category("Player")
-@export var follow: Node2D
+
+@export_category("Follow")
+@export var follow_x: bool = true
+@export var follow_y: bool = true
+
 
 @export_category("Camera Smoothing")
 @export var enabled_smoothing: bool = true
 @export_range(1, 10) var smoothing_distance: int = 8
 @export_range(0.1, 1.0) var zoom_speed: float = 1.0
 
-
-
+@export_category("Camera Shake")
 @export var shake_noise: Noise
 @export var shake_decay: float = 3.0
+
+
+var follow: Player
 
 var x_noise_sample_vector: Vector2 = Vector2.RIGHT
 var y_noise_sample_vector: Vector2 = Vector2.DOWN
@@ -39,7 +44,10 @@ func _process(delta: float) -> void:
 		zoom = lerp(zoom, Vector2(2, 2), zoom_weight * delta)
 		global_position = _get_camera_position()
 	elif follow:
-		global_position.y = _get_camera_position().y
+		if follow_y:
+			global_position.y = _get_camera_position().y
+		if follow_x:
+			global_position.x = _get_camera_position().x
 		
 	if (current_shake_percentage > 0):
 		_process_shake(delta)

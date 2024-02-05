@@ -31,12 +31,11 @@ unique_name_in_owner = true
 [node name="OxygenManager" parent="." instance=ExtResource("2_sr6fs")]
 total_oxygen = 20.0
 
-[node name="Camera2D" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("3_pvuye")]
+[node name="Camera2D" parent="." instance=ExtResource("3_pvuye")]
 position = Vector2(240, 2.08165e-12)
 drag_vertical_enabled = true
 drag_top_margin = 0.35
 drag_bottom_margin = 0.35
-follow = NodePath("../Player")
 smoothing_distance = 2
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -57,14 +56,6 @@ autostart = true
 [node name="Player" parent="." instance=ExtResource("1_1cdke")]
 position = Vector2(137, 192)
 enabled_debug_labels = false
-jump_height = 52.0
-jump_time_to_peak = 0.36
-low_jump_multiplier = 4.6
-move_distance = 13.0
-move_time_to_distance = 0.25
-move_stop_distance = 8.0
-move_time_to_stop_distance = 0.225
-max_velocity = 132.0
 
 [node name="Fan" parent="." instance=ExtResource("6_n1o1k")]
 position = Vector2(104, 96)
@@ -97,8 +88,3 @@ position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_0dkib")
 
 [node name="Spikes" type="Node" parent="."]
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
-color = Color(0.670588, 0.705882, 0.513726, 1)
-blend_mode = 1

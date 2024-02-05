@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://gnedlonmuvb2"]
+
+[ext_resource type="Script" path="res://scenes/spawners/player/player_spawner.gd" id="1_i6l34"]
+
+[node name="PlayerSpawner" type="Marker2D"]
+script = ExtResource("1_i6l34")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

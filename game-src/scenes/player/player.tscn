@@ -314,9 +314,15 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
 enabled_debug_labels = true
-jump_height = 100.0
-jump_time_to_peak = 0.27
+jump_height = 52.0
+jump_time_to_peak = 0.36
 jump_time_to_descent = 0.32
+low_jump_multiplier = 4.6
+move_distance = 13.0
+move_time_to_distance = 0.25
+move_stop_distance = 8.0
+move_time_to_stop_distance = 0.225
+max_velocity = 132.0
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -425,7 +431,7 @@ position = Vector2(2.08165e-12, -12)
 rotation = -3.14159
 target_position = Vector2(2.08165e-12, 10)
 
-[node name="HeadCastRight" type="RayCast2D" parent="HeadCasts"]
+[node name="HeadCastRight" type="RayCast2D" parent="HeadCasts" groups=["player"]]
 unique_name_in_owner = true
 position = Vector2(4, -12)
 rotation = -3.14159

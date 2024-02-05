@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://eb460qyvakim"]
+
+[ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_ox0jc"]
+[ext_resource type="PackedScene" uid="uid://c3ci3erc0ml0d" path="res://scenes/oxygen-progress/oxygen_progress.tscn" id="2_548b4"]
+[ext_resource type="PackedScene" uid="uid://c26imya6om8te" path="res://managers/oxygen_manager/oxygen_manager.tscn" id="3_gspod"]
+[ext_resource type="PackedScene" uid="uid://bn56uuir7ip7j" path="res://scenes/camera/camera_2d.tscn" id="4_dm5ix"]
+[ext_resource type="TileSet" uid="uid://bvugbhh5qmfak" path="res://resources/tiles/tile_set.tres" id="5_8mpn4"]
+[ext_resource type="PackedScene" uid="uid://sjhnnyj383b3" path="res://scenes/player/player.tscn" id="6_qt7ih"]
+[ext_resource type="PackedScene" uid="uid://gnedlonmuvb2" path="res://scenes/spawners/player/player_spawner.tscn" id="8_88286"]
+[ext_resource type="PackedScene" uid="uid://dss00hhebmiik" path="res://scenes/finish/finish.tscn" id="10_ca0h1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dkib"]
+radius = 15.0
+
+[node name="BaseLevel" type="Node" node_paths=PackedStringArray("main_camera")]
+script = ExtResource("1_ox0jc")
+main_camera = NodePath("Camera2D")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="OxygenLevel" parent="UI" instance=ExtResource("2_548b4")]
+unique_name_in_owner = true
+
+[node name="OxygenManager" parent="." instance=ExtResource("3_gspod")]
+total_oxygen = 20.0
+
+[node name="OxygenTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="Camera2D" parent="." instance=ExtResource("4_dm5ix")]
+position = Vector2(240, 2.08165e-12)
+drag_vertical_enabled = true
+drag_top_margin = 0.35
+drag_bottom_margin = 0.35
+smoothing_distance = 2
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("5_8mpn4")
+format = 2
+layer_0/name = "Base"
+layer_0/z_index = 1
+layer_1/name = "Background"
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Finish" parent="." instance=ExtResource("10_ca0h1")]
+position = Vector2(336, -688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish"]
+position = Vector2(-1, -7)
+shape = SubResource("CircleShape2D_0dkib")
+
+[node name="Oxygen" type="Node2D" parent="."]
+
+[node name="Fans" type="Node2D" parent="."]
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="PlayerSpawner" parent="." instance=ExtResource("8_88286")]
+player_scene = ExtResource("6_qt7ih")

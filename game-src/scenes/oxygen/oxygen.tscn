@@ -235,6 +235,7 @@ unique_name_in_owner = true
 shape = SubResource("CircleShape2D_3ykq8")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
 explosiveness = 0.15
 randomness = 0.15
 emission_shape = 1
@@ -246,3 +247,7 @@ angular_velocity_max = 3.0
 radial_accel_min = 0.5
 radial_accel_max = 1.0
 color = Color(1, 1, 1, 0.0666667)
+
+[node name="VisibilityNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(2.15, 1.85)

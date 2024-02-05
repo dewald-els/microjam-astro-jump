@@ -1,5 +1,7 @@
 extends Node
 
+signal player_spawn
+signal player_was_spawned(player: Player)
 signal player_entered_fan_zone(fan_power: float, direction: String)
 signal player_exited_fan_zone
 signal player_dead
