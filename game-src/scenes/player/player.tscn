@@ -415,7 +415,7 @@ script = ExtResource("18_8g7ak")
 
 [node name="HeadCastLeft" type="RayCast2D" parent="HeadCasts"]
 unique_name_in_owner = true
-position = Vector2(-3, -12)
+position = Vector2(-4, -12)
 rotation = -3.14159
 target_position = Vector2(2.08165e-12, 10)
 
@@ -427,6 +427,6 @@ target_position = Vector2(2.08165e-12, 10)
 
 [node name="HeadCastRight" type="RayCast2D" parent="HeadCasts"]
 unique_name_in_owner = true
-position = Vector2(3, -12)
+position = Vector2(4, -12)
 rotation = -3.14159
 target_position = Vector2(2.08165e-12, 10)
