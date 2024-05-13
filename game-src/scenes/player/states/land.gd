@@ -4,12 +4,12 @@ extends State
 
 
 func enter(_msg: Dictionary = {}) -> void:
-	player.animation_player.play("land")
+	player.animated_sprite.play("land")
 	
 func update(delta: float) -> void:
 	if Input.is_action_just_pressed("player_jump"):
 		player.change_state(player.PlayerState.Jump)
-	if not player.animation_player.is_playing():
+	if not player.animated_sprite.is_playing():
 		player.change_state(player.PlayerState.Idle)
 		
 	player.apply_gravity(delta)

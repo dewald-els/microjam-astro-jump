@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=53 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b0sx3p1sm4wcv" path="res://scenes/player/sprites/dead.png" id="10_e6hqv"]
 [ext_resource type="Script" path="res://scenes/player/states/finish.gd" id="10_gfnmp"]
 [ext_resource type="Texture2D" uid="uid://codu5q1fcetdm" path="res://scenes/player/sprites/fall.png" id="14_5katr"]
+[ext_resource type="Texture2D" uid="uid://7d47r00sqnjy" path="res://scenes/player/sprites/land.png" id="17_3ibtg"]
 [ext_resource type="Script" path="res://scenes/player/head_casts.gd" id="18_8g7ak"]
 
 [sub_resource type="Animation" id="Animation_8vcmg"]
@@ -107,30 +108,6 @@ tracks/1/keys = {
 resource_name = "land"
 length = 0.1
 step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1.1, 0.8), Vector2(0.9, 1.05), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(2.08165e-12, -8), Vector2(2.08165e-12, -11), Vector2(2.08165e-12, -10)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7dttp"]
 _data = {
@@ -195,6 +172,30 @@ region = Rect2(16, 0, 16, 20)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8nrb"]
 atlas = ExtResource("9_k12ar")
 region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hmbw"]
+atlas = ExtResource("17_3ibtg")
+region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnldh"]
+atlas = ExtResource("17_3ibtg")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqcmb"]
+atlas = ExtResource("17_3ibtg")
+region = Rect2(32, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm3sy"]
+atlas = ExtResource("17_3ibtg")
+region = Rect2(48, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7abne"]
+atlas = ExtResource("17_3ibtg")
+region = Rect2(64, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw1ir"]
+atlas = ExtResource("17_3ibtg")
+region = Rect2(80, 0, 16, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltt70"]
 atlas = ExtResource("1_m4xf8")
@@ -283,6 +284,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_3hmbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnldh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqcmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm3sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7abne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw1ir")
+}],
+"loop": false,
+"name": &"land",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ltt70")
 }, {
 "duration": 1.0,
@@ -313,7 +337,6 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
-enabled_debug_labels = true
 jump_height = 52.0
 jump_time_to_peak = 0.36
 jump_time_to_descent = 0.32
@@ -370,8 +393,10 @@ light_mask = 0
 position = Vector2(2.08165e-12, -10)
 rotation = 6.28319
 sprite_frames = SubResource("SpriteFrames_wpup6")
-animation = &"fall"
+animation = &"land"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
