@@ -338,14 +338,14 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
 jump_height = 52.0
-jump_time_to_peak = 0.36
-jump_time_to_descent = 0.32
-low_jump_multiplier = 4.6
-move_distance = 13.0
-move_time_to_distance = 0.25
+jump_time_to_peak = 0.3
+jump_time_to_descent = 0.25
+low_jump_multiplier = 2.5
+move_distance = 14.0
+move_time_to_distance = 0.45
 move_stop_distance = 8.0
 move_time_to_stop_distance = 0.225
-max_velocity = 132.0
+max_velocity = 130.0
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
