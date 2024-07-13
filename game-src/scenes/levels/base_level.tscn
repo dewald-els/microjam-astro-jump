@@ -1,18 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://eb460qyvakim"]
+[gd_scene load_steps=14 format=3 uid="uid://eb460qyvakim"]
 
 [ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_ox0jc"]
 [ext_resource type="PackedScene" uid="uid://c3ci3erc0ml0d" path="res://scenes/oxygen-progress/oxygen_progress.tscn" id="2_548b4"]
 [ext_resource type="PackedScene" uid="uid://c26imya6om8te" path="res://managers/oxygen_manager/oxygen_manager.tscn" id="3_gspod"]
 [ext_resource type="PackedScene" uid="uid://bn56uuir7ip7j" path="res://scenes/camera/camera_2d.tscn" id="4_dm5ix"]
 [ext_resource type="TileSet" uid="uid://bvugbhh5qmfak" path="res://resources/tiles/tile_set.tres" id="5_8mpn4"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_wnoo5"]
 [ext_resource type="PackedScene" uid="uid://sjhnnyj383b3" path="res://scenes/player/player.tscn" id="6_qt7ih"]
 [ext_resource type="PackedScene" uid="uid://gnedlonmuvb2" path="res://scenes/spawners/player/player_spawner.tscn" id="8_88286"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="10_5uq8x"]
 [ext_resource type="PackedScene" uid="uid://dss00hhebmiik" path="res://scenes/finish/finish.tscn" id="10_ca0h1"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="11_d83vy"]
+
+[sub_resource type="Resource" id="Resource_exfgo"]
+script = ExtResource("11_d83vy")
+duration = 1.0
+transition = 0
+ease = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dkib"]
 radius = 15.0
 
-[node name="BaseLevel" type="Node" node_paths=PackedStringArray("main_camera")]
+[node name="BaseLevel" type="Node2D" node_paths=PackedStringArray("main_camera")]
 script = ExtResource("1_ox0jc")
 main_camera = NodePath("Camera2D")
 
@@ -30,12 +39,17 @@ wait_time = 30.0
 one_shot = true
 autostart = true
 
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("10_5uq8x")
+tween_resource = SubResource("Resource_exfgo")
+
 [node name="Camera2D" parent="." instance=ExtResource("4_dm5ix")]
-position = Vector2(240, 2.08165e-12)
 drag_vertical_enabled = true
 drag_top_margin = 0.35
 drag_bottom_margin = 0.35
-smoothing_distance = 2
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("5_wnoo5")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("5_8mpn4")

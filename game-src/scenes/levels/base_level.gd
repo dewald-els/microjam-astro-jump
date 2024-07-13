@@ -34,5 +34,5 @@ func on_camera_shake_completed() -> void:
 
 
 func on_player_was_spawned(player: Player) -> void:
-	main_camera.follow = player
+	#main_camera.follow = player
 	pass

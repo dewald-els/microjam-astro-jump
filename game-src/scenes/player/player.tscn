@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://sjhnnyj383b3"]
+[gd_scene load_steps=54 format=3 uid="uid://sjhnnyj383b3"]
 
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_6lmrg"]
 [ext_resource type="Texture2D" uid="uid://ddimpk2clpm2t" path="res://scenes/player/sprites/run.png" id="1_m4xf8"]
@@ -335,6 +335,9 @@ gradient = SubResource("Gradient_347xb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hux75"]
+radius = 12.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wxwpk")
 jump_height = 52.0
@@ -391,7 +394,6 @@ libraries = {
 unique_name_in_owner = true
 light_mask = 0
 position = Vector2(2.08165e-12, -10)
-rotation = 6.28319
 sprite_frames = SubResource("SpriteFrames_wpup6")
 animation = &"land"
 autoplay = "idle"
@@ -461,3 +463,12 @@ unique_name_in_owner = true
 position = Vector2(4, -12)
 rotation = -3.14159
 target_position = Vector2(2.08165e-12, 10)
+
+[node name="Areas" type="Node" parent="."]
+
+[node name="BubbleCollectArea" type="Area2D" parent="Areas"]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/BubbleCollectArea"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_hux75")

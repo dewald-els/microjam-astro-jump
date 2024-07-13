@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SignalBus="*res://autoloaders/signal_bus.gd"
 ControllerConfig="*res://autoloaders/player/controller_config.gd"
 SceneTransition="*res://autoloaders/scene_transition/scene_transition.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [debug]
 
@@ -42,6 +43,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Astro Jump"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

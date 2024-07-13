@@ -25,11 +25,15 @@ const States: Dictionary = {
 	Land = "Land"
 }
 
+# Signals
+signal bubble_collected
+
 @onready var state_machine: StateMachine = %StateMachine
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var bubble_collection_area: Area2D = %BubbleCollectArea
 
 # Debug
 @export_category("Debug")
@@ -69,6 +73,8 @@ func _ready() -> void:
 	SignalBus.connect("player_exited_fan_zone", on_player_exited_fan_zone)
 	SignalBus.connect("oxygen_depleted", on_oxygen_depleted)
 	SignalBus.connect("player_reached_exit", on_player_reached_exit)
+	
+	bubble_collection_area.connect("area_entered", on_bubble_area_entered)
 	
 	if not enabled_debug_labels:
 		label.visible = false
@@ -184,7 +190,10 @@ func on_player_exited_fan_zone(direction: String) -> void:
 		await get_tree().create_timer(0.20).timeout
 		
 	change_state(PlayerState.Fall)
-	
+
+
+func on_bubble_area_entered(area: Area2D) -> void:
+	SignalBus.emit_signal("player_bubble_collected")
 
 func on_player_reached_exit() -> void:
 	change_state(PlayerState.Finish)

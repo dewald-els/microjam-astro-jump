@@ -14,10 +14,12 @@ var player: Player = null
 
 
 func _ready() -> void:
-	connect("body_entered", on_body_entered)
+	connect("body_entered", on_player_bubble_collected)
+	SignalBus.connect("player_bubble_collected", on_player_bubble_collected)
 	visibility_notifier.connect("screen_entered", on_screen_entered)
 	visibility_notifier.connect("screen_exited", on_screen_exited)
 	player_detection_area.connect("body_entered", on_player_detected)
+	toggle_effects()
 	
 
 func _physics_process(delta: float) -> void:
@@ -26,7 +28,7 @@ func _physics_process(delta: float) -> void:
 			player.global_position, 
 			float_to_player_speed * 1000 * delta)
 	
-func on_body_entered(body: Node2D) -> void:
+func on_player_bubble_collected(body: Node2D) -> void:
 	if "Player" in body.name:
 		SignalBus.emit_signal("oxygen_collect", oxygen_value)
 		animation_player.play("collect")
@@ -35,8 +37,7 @@ func on_body_entered(body: Node2D) -> void:
 func on_player_detected(body: Node2D) -> void:
 	if "Player" in body.name:
 		player = body as Player
-		light.enabled = false
-		particles.emitting = false
+		toggle_effects()
 		
 
 func on_screen_entered() -> void:
