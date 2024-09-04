@@ -11,7 +11,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
-		player.change_state(player.PlayerState.Land)
+		player.change_state(player.PlayerState.Idle)
 	if player.velocity.y > 0.0 and not player.is_on_floor():
 		player.change_state(player.PlayerState.Fall)
 	

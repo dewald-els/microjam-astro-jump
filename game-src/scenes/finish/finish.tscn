@@ -92,7 +92,7 @@ unique_name_in_owner = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ship"]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(1.5, -15)
+position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_xc3j1")
 animation = &"idle"
 

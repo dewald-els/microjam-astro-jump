@@ -21,8 +21,7 @@ const States: Dictionary = {
 	Dead = "Dead",
 	Fall = "Fall",
 	Pushed = "Pushed",
-	Finish = "Finish",
-	Land = "Land"
+	Finish = "Finish"
 }
 
 # Signals
@@ -86,7 +85,7 @@ func _process(_delta: float) -> void:
 	label_vel.text = str(velocity)
 	label.text = str(state_machine.state) + " - scale: " + str(scale.x) + "," + str(scale.y)
 
-func get_gravity() -> float:
+func _get_gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
 
 
@@ -102,8 +101,6 @@ func change_state(state: PlayerState, _msg: Dictionary = {}) -> void:
 			state_machine.transition_to(States.Run, _msg)
 		PlayerState.Jump:
 			state_machine.transition_to(States.Jump, _msg)
-		PlayerState.Land:
-			state_machine.transition_to(States.Land, _msg)
 		PlayerState.Die:
 			state_machine.transition_to(States.Die, _msg)
 		PlayerState.Fall:
@@ -123,9 +120,9 @@ func apply_gravity(delta: float) -> void:
 		return
 		
 	if velocity.y < 0 && !Input.is_action_pressed("player_jump"): # Low Jump
-		velocity.y += get_gravity() * low_jump_multiplier * delta
+		velocity.y += _get_gravity() * low_jump_multiplier * delta
 	else: # Regular Jump
-		velocity.y += get_gravity() * delta
+		velocity.y += _get_gravity() * delta
 
 
 func get_movement_direction() -> int:
@@ -158,8 +155,8 @@ func apply_movement(direction: int = 0, delta: float = 0.0) -> void:
 		else:
 			velocity.x = 0.0
 	elif abs(velocity.x) < max_velocity:
-		if previous_direction != direction: # Quick Turn
-			velocity.x = lerp(velocity.x, 0.0, 0.2)
+		#if previous_direction != direction: # Quick Turn
+			#velocity.x = lerp(velocity.x, 0.0, 0.2)
 		velocity.x = velocity.x + (move_velocity * move_friction) * direction * delta
 	else:
 		velocity.x = max_velocity * direction
